@@ -3,7 +3,7 @@ section.py-5
     .row.gx-4.gx-lg-5.align-items-center
       .col-md-6
         / img.card-img-top.mb-5.mb-md-0
-        = image_tag(@product.product_image, :class => "card-img-top mb-5 mb-md-0") if @product.image.attached?
+        = image_tag(@product.image.variant(:big), :class => "card-img-top mb-5 mb-md-0") if @product.image.attached?
       .col-md-6
         .small.mb-1
           | SKU: BST-498

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'carts/new'
-  get 'carts/show'
-  get 'carts/destroy'
   root to: 'static_pages#home'
 
   get 'home', to: 'static_pages#home'
@@ -13,6 +10,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :users
+    resources :carts
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end

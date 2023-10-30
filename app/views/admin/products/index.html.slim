@@ -29,13 +29,13 @@ table.table.table-bordered
         td
           = product.name
         td
-          = product.category_id
+          = product.category.name
         td
           = product.price
         td
           = product.stock
         td
-          = image_tag(product.display_image) if product.image.attached?
+          = image_tag(product.image.variant(:thumb)) if product.image.attached?
         td
           table
             tr

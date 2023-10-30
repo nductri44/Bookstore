@@ -1,7 +1,7 @@
 header
   nav.navbar.navbar-expand-lg.navbar-light.bg-dark
     .container.px-4.px-lg-5
-      a.navbar-brand.text-white.strong[href="#!"]
+      a.navbar-brand.text-white.strong[href=home_path]
         | StrandBooks
       button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
@@ -45,16 +45,66 @@ header
                   li
                     a.dropdown-item[href="#!"]
                       | Cooking 
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-        li.nav-item
-          a.nav-link.active.text-white[href="#!"]
-            | Login
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-        li.nav-item
-          a.nav-link.active.text-white[href="#!"]
-            | Login Shop
-      button.btn.btn-light.ms-lg-2[type="submit"]
-        i.bi-cart-fill.me-1
-        |  Cart 
-        span.badge.bg-dark.text-white.ms-1.rounded-pill
-          | 0
+      - if admin_logged_in?
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active.text-white[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Create
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href=new_admin_category_path]
+                  | Category
+              li
+                a.dropdown-item.text-black[href=new_admin_product_path]
+                  | Product
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active.text-white[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Account
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href="#!"]
+                  | Profile
+              li
+                a.dropdown-item.text-black[href=admin_logout_path data-method="delete"]
+                  | Logout
+      - elsif user_logged_in?
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active.text-white[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Account
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href="#!"]
+                  | Profile
+              li
+                a.dropdown-item.text-black[href=logout_path data-method="delete"]
+                  | Logout
+        button.btn.btn-light.ms-lg-2[type="submit"]
+          i.bi-cart-fill.me-1
+          |  Cart 
+          span.badge.bg-dark.text-white.ms-1.rounded-pill
+            | 0  
+      - else
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item
+            a.nav-link.active.text-white[href=signup_path]
+              | SignUp
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item
+            a.nav-link.active.text-white[href=admin_signup_path]
+              | SignUp Shop
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item
+            a.nav-link.active.text-white[href=login_path]
+              | Login
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
+          li.nav-item
+            a.nav-link.active.text-white[href=admin_login_path]
+              | Login Shop
+        button.btn.btn-light.ms-lg-2[type="submit"]
+          i.bi-cart-fill.me-1
+          |  Cart 
+          span.badge.bg-dark.text-white.ms-1.rounded-pill
+            | 0
+      end

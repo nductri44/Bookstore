@@ -1,0 +1,31 @@
+= form_with(model: @user, local: true) do |f|
+  = render 'shared/error_messages', object: f.object
+  br
+  = f.label :name
+  br
+  = f.text_field :name, class: 'form-control'
+
+  = f.label :email
+  br
+  = f.email_field :email, class: 'form-control'
+
+  = f.label :password
+  br
+  = f.password_field :password, class: 'form-control'
+
+  = f.label :password_confirmation, 'Confirmation'
+  br
+  = f.password_field :password_confirmation, class: 'form-control'
+  
+  = f.label :address
+  br
+  = f.text_field :address, class: 'form-control'
+
+  = f.label :phone
+  br
+  = f.text_field :phone, class: 'form-control'
+  br
+
+  = f.submit yield(:button_text), class: 'btn btn-primary'
+  
+    

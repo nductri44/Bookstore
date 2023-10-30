@@ -1,0 +1,49 @@
+- provide :title, "All products"
+h2 Product
+
+a href=new_admin_product_path class="btn btn-primary active mb-4" role="button" aria-pressed="true"
+  | New product
+
+table.table.table-bordered
+  thead
+    tr
+      th[scope="col"]
+        | ID
+      th[scope="col"]
+        | Name
+      th[scope="col"]
+        | Description
+      th[scope="col"]
+        | Category
+      th[scope="col"]
+        | Author
+      th[scope="col"]
+        | Publisher
+      th[scope="col"]
+        | Price
+      th[scope="col"]
+        | Stock
+      th[scope="col"]
+        | Image
+  tbody
+    - @products.each do |product|
+      tr
+        th[scope="row"]
+          = product.id
+        td
+          = product.name
+        td
+          = product.description
+        td
+          = product.category_id
+        td
+          = product.author
+        td
+          = product.publisher
+        td
+          = product.price
+        td
+          = product.stock
+        td
+          = image_tag(product.display_image) if product.image.attached?
+

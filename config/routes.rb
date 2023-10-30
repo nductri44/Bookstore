@@ -1,18 +1,29 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-  get 'password_resets/create'
-  get 'password_resets/edit'
-  get 'password_resets/update'
-  get 'account_activations/edit'
   root to: 'static_pages#home'
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get '/home', to: 'static_pages#home'
 
-  resources :admin_shops
-  resources :users
-  resources :account_activations, only: :edit
+  scope module: 'user' do
+    get 'signup', to: 'users#new'
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy'
+    resources :users
+    resources :account_activations, only: :edit
+    resources :password_resets, only: %i[new create edit update]
+  end
+
+  namespace :admin do
+    get 'signup', to: 'admins#new'
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy'
+    resources :admins
+    resources :categories
+    resources :products
+    resources :account_activations, only: :edit
+    resources :password_resets, only: %i[new create edit update]
+  end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

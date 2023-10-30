@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Admin < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
@@ -21,10 +21,10 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  # Remembers a user in the database for use in persistent sessions.
-  def user_remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+  # Remembers an admin in the database for use in persistent sessions.
+  def admin_remember
+    self.remember_token = Admin.new_token
+    update_attribute(:remember_digest, Admin.digest(remember_token))
   end
 
   # Returns true if the given token match the digest.
@@ -35,8 +35,8 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  # Forgets a user.
-  def user_forget
+  # Forgets an admin.
+  def admin_forget
     update_attribute(:remember_digest, nil)
   end
 
@@ -48,19 +48,19 @@ class User < ApplicationRecord
 
   # Sends activation email.
   def send_activation_email
-    UserMailer.account_activation(self).deliver_now
+    AdminMailer.account_activation(self).deliver_now
   end
 
   # Sets the password reset attributes.
   def create_reset_digest
-    self.reset_token = User.new_token
-    update_attribute(:reset_digest, User.digest(reset_token))
+    self.reset_token = Admin.new_token
+    update_attribute(:reset_digest, Admin.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   # Sends password reset email.
   def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
+    AdminMailer.password_reset(self).deliver_now
   end
 
   # Returns true if a password reset has expired.
@@ -77,7 +77,7 @@ class User < ApplicationRecord
 
   # Creates and assigns the activation token and digest.
   def create_activation_digest
-    self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    self.activation_token = Admin.new_token
+    self.activation_digest = Admin.digest(activation_token)
   end
 end

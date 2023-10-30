@@ -1,0 +1,36 @@
+= form_with(model: [:admin, @product], local: true) do |f|
+  = render 'shared/error_messages', object: f.object
+  br
+  = f.label :name
+  br
+  = f.text_field :name, class: 'form-control'
+
+  = f.label :description
+  br
+  = f.text_field :description, class: 'form-control'
+
+  = f.label :category
+  br
+  = f.collection_select :category_id, Category.all, :id, :name, {:prompt => '-- Select a Category --'}
+  
+  = f.label :author
+  br
+  = f.text_field :author, class: 'form-control'
+
+  = f.label :publisher
+  br
+  = f.text_field :publisher, class: 'form-control'
+
+  = f.label :price
+  br
+  = f.number_field :price, step: 0.001, class: 'form-control'
+
+  = f.label :stock
+  br
+  = f.number_field :stock, class: 'form-control'
+
+  br
+  = f.submit yield(:button_text), class: 'btn btn-primary'
+
+  span.image
+    = f.file_field :image, accept: "image/jpeg,image/gif,image/png"

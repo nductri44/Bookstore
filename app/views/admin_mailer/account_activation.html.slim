@@ -1,0 +1,7 @@
+h1 StrandBooks
+p Hi
+= @admin.name
+p Welcome to StrandBooks! Click on the link below to activate your account:
+
+= link_to 'Activate', edit_admin_account_activation_url(@admin.activation_token, email: @admin.email)
+

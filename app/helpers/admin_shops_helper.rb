@@ -1,2 +1,0 @@
-module AdminShopsHelper
-end

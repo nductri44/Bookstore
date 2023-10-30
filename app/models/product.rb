@@ -25,4 +25,8 @@ class Product < ApplicationRecord
   def display_image
     image.variant(resize_to_limit: [100, 100])
   end
+
+  def product_image
+    image.variant(resize_to_limit: [500, 500])
+  end
 end

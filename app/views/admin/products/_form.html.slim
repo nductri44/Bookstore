@@ -29,8 +29,10 @@
   br
   = f.number_field :stock, class: 'form-control'
 
+  div.image.pt-4
+  = f.label :image
+  = f.file_field :image, accept: "image/jpeg,image/gif,image/png"
+
   br
   = f.submit yield(:button_text), class: 'btn btn-primary'
-
-  span.image
-    = f.file_field :image, accept: "image/jpeg,image/gif,image/png"
+  

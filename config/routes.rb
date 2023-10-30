@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  get 'carts/new'
+  get 'carts/show'
+  get 'carts/destroy'
   root to: 'static_pages#home'
 
-  get '/home', to: 'static_pages#home'
+  get 'home', to: 'static_pages#home'
+  get 'help', to: 'static_pages#help'
 
   scope module: 'user' do
     get 'signup', to: 'users#new'

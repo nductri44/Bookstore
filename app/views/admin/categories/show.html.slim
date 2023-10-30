@@ -1,22 +1,2 @@
-- provide :title, "All categories"
-h2 Category
-
-table.table.table-bordered
-  thead
-    tr
-      th[scope="col"]
-        | ID
-      th[scope="col"]
-        | Name
-      th[scope="col"]
-        | Description
-  tbody
-    - @categories.each do |category|
-      tr
-        th[scope="row"]
-          = category.id
-        td
-          = category.name
-        td
-          = category.description
-
+h2
+  = @category.name

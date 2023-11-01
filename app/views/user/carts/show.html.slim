@@ -1,0 +1,31 @@
+table.table.table-bordered
+  thead.bg-dark.text-white
+    tr
+      th[scope="col" class="text-center"]
+        | Product
+      th[scope="col" class="text-center"]
+        | Price
+      th[scope="col" class="text-center"]
+        | Quantity
+      th[scope="col" class="text-center"]
+        | Action
+  tbody
+    - @cart.cart_items.each do |item|
+      tr
+        th[scope="row"]
+          = item.product.name
+        td.text-center
+          = item.product.price
+          '  VND
+        td.text-center
+          = item.quantity
+        td
+          = link_to "Edit", edit_user_cart_path
+          br
+          = link_to "Delete"
+.col
+  h2.float-start
+    | Total payment
+  h2.float-end
+    = @total_price
+    '  VND

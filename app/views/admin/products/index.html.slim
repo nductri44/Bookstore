@@ -29,7 +29,8 @@ table.table.table-bordered
         td
           = product.name
         td
-          = product.category.name
+          - product.categories.each do |category|
+            = category.name
         td
           = product.price
         td

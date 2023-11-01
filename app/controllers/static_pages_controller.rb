@@ -1,10 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
+    @products = Product.all
   end
 
-  def show
-  end
+  def show; end
 
-  def help
-  end
+  def help; end
 end

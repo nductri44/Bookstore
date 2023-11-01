@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
 
-  get '/home', to: 'static_pages#home'
+  get 'home', to: 'static_pages#home'
+  get 'help', to: 'static_pages#help'
 
   scope module: 'user' do
     get 'signup', to: 'users#new'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :users
+    resources :carts
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end

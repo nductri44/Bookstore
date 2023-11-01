@@ -1,10 +1,34 @@
-h1 = @category.nil? ? 'Main categories' : category.text
-table
-  - @categories.each do |category|
-  tr
-    td = link_to category.text, category_path(category)
-    td = link_to 'Edit', edit_category_path(category) unless category.parent.nil?
-    td = link_to 'Destroy', category_path(category), :confirm => 'Are you sure?', :method => :delete unless category.parent.nil?
-p
-  = link_to 'Back', @category.parent_category.nil? ? categories_path : category_path(@category.parent_category) unless @category.nil?
-  = link_to 'New sub-category', new_category_path(@category) unless @category.nil?
+- provide :title, "All categories"
+h2 Category
+
+a href=new_admin_category_path class="btn btn-primary active mb-4" role="button" aria-pressed="true"
+  | New category
+
+table.table.table-bordered
+  thead
+    tr
+      th[scope="col"]
+        | ID
+      th[scope="col"]
+        | Name
+      th[scope="col"]
+        | Description
+      th[scope="col"]
+        | Action
+  tbody
+    - @categories.each do |category|
+      tr
+        th[scope="row"]
+          = category.id
+        td
+          = category.name
+        td
+          = category.description
+        td
+          table
+            tr
+              td
+                = link_to "Edit", edit_admin_category_path(category), class: "btn btn-dark mx-2"
+              td
+                = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-dark"
+

@@ -25,7 +25,7 @@ class Admin::AdminsController < ApplicationController
   def update
     if @admin.update(admin_params)
       flash[:success] = 'Profile updated'
-      redirect_to(@admin)
+      redirect_to(admin_admin_path)
     else
       render('edit')
     end
@@ -33,8 +33,8 @@ class Admin::AdminsController < ApplicationController
 
   def destroy
     @admin.destroy
-    flash[:success] = 'User deleted'
-    redirect_to(admins_url)
+    flash[:success] = 'Admin deleted'
+    redirect_to(root_url)
   end
 
   private

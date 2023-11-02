@@ -1,4 +1,5 @@
 class Admin::CategoriesController < ApplicationController
+  before_action :logged_in_admin
   before_action :set_category, only: %i[show edit update destroy]
 
   def new
@@ -9,7 +10,13 @@ class Admin::CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def show; end
+  def show
+    @products = Category.products_in_category(@category.name)
+
+    return unless @products.nil?
+
+    flash[:danger] = 'Products not found.'
+  end
 
   def create
     @category = Category.new(category_params)

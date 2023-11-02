@@ -7,7 +7,9 @@ class User::UsersController < ApplicationController
     @user = User.new
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
 
   def create
     @user = User.new(user_params)
@@ -26,7 +28,7 @@ class User::UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'Profile updated'
-      redirect_to(home_url)
+      redirect_to(user_user_url)
     else
       render('edit')
     end

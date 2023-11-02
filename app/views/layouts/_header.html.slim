@@ -15,36 +15,18 @@ header
               | Products
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
-                a.dropdown-item.text-black[href="#!"]
+                a.dropdown-item.text-black[href=admin_products_path]
                   | All Books
               li
                 hr.dropdown-divider
               li
                 a.dropdown-item.text-black[href="#!"]
-                  | Best Sellers
-              li
-                a.dropdown-item.text-black[href="#!"]
-                  | New Arrivals
-              li
-                a.dropdown-item.text-black[href="#!"]
-                  | Vietnamese &raquo;
+                  | Category &raquo;
                 ul.dropdown-menu.dropdown-submenu
-                  li
-                    a.dropdown-item[href="#!"]
-                      | Education
-                  li
-                    a.dropdown-item[href="#!"]
-                      | Travel Guides
-              li
-                a.dropdown-item.text-black[href="#!"]
-                  | Foreigns &raquo;
-                ul.dropdown-menu.dropdown-submenu
-                  li
-                    a.dropdown-item[href="#!"]
-                      | Business 
-                  li
-                    a.dropdown-item[href="#!"]
-                      | Cooking 
+                  - Category.all.each do |category|
+                    li
+                      a.dropdown-item[href=admin_category_path(category)]
+                        = category.name
       - if admin_logged_in?
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
           li.nav-item.dropdown
@@ -63,7 +45,7 @@ header
               | Account
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
-                a.dropdown-item.text-black[href="#!"]
+                a.dropdown-item.text-black[href=admin_admin_path(current_admin)]
                   | Profile
               li
                 a.dropdown-item.text-black[href=admin_logout_path data-method="delete"]
@@ -75,7 +57,7 @@ header
               | Account
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
-                a.dropdown-item.text-black[href="#!"]
+                a.dropdown-item.text-black[href=user_user_path(current_user)]
                   | Profile
               li
                 a.dropdown-item.text-black[href=user_logout_path data-method="delete"]
@@ -87,24 +69,25 @@ header
             | 0
       - else
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-          li.nav-item
-            a.nav-link.active.text-white[href=user_signup_path]
-              | SignUp
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active.text-white[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | User
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href=user_login_path]
+                  | Sign In
+              li
+                a.dropdown-item.text-black[href=user_signup_path]
+                  | Sign Up
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-          li.nav-item
-            a.nav-link.active.text-white[href=admin_signup_path]
-              | SignUp Shop
-        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-          li.nav-item
-            a.nav-link.active.text-white[href=user_login_path]
-              | Login
-        ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
-          li.nav-item
-            a.nav-link.active.text-white[href=admin_login_path]
-              | Login Shop
-        button.btn.btn-light.ms-lg-2[type="submit"]
-          i.bi-cart-fill.me-1
-          |  Cart 
-          span.badge.bg-dark.text-white.ms-1.rounded-pill
-            | 0  
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.active.text-white[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Shop
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href=admin_login_path]
+                  | Sign In
+              li
+                a.dropdown-item.text-black[href=admin_signup_path]
+                  | Sign Up
       end

@@ -1,6 +1,23 @@
 - provide :title, @admin.name
 .row
-  aside.col-md-4 
+  aside.col-md-8 
     section
       h2
+        ' Name:
         = @admin.name
+        br
+        ' Email:
+        = @admin.email
+        br
+        '  Address:
+        = @admin.address
+        br
+        ' Phone:
+        = @admin.phone
+        br
+        ' Tax code:
+        = @admin.tax_code
+      
+    = link_to "Edit your profile", edit_admin_admin_path, class: "btn btn-dark"
+    br
+    = link_to "Delete your account", admin_admin_path, class: "btn btn-dark mt-3", method: :delete

@@ -16,16 +16,15 @@ table.table.table-bordered
           = item.product.name
         td.text-center
           = item.product.price
-          '  VND
         td.text-center
           = item.quantity
         td
-          = link_to "Edit", edit_user_cart_path
+          = link_to "Edit", edit_user_cart_path(item)
           br
-          = link_to "Delete"
+          = link_to "Delete", user_cart_path(item), method: :delete
 .col
   h2.float-start
     | Total payment
   h2.float-end
     = @total_price
-    '  VND
+    

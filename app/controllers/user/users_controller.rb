@@ -12,6 +12,7 @@ class User::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.create_cart!
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
       redirect_to(root_url)
@@ -25,7 +26,7 @@ class User::UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'Profile updated'
-      redirect_to(@user)
+      redirect_to(home_url)
     else
       render('edit')
     end
@@ -34,7 +35,7 @@ class User::UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = 'User deleted'
-    redirect_to(users_url)
+    redirect_to(root_url)
   end
 
   private

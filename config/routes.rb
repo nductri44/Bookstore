@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   get 'home', to: 'static_pages#home'
   get 'help', to: 'static_pages#help'
 
-  scope module: 'user' do
+  namespace :user do
     get 'signup', to: 'users#new'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
+    delete 'delete_item', to: 'carts#destroy'
+    resource ''
     resources :users
     resources :carts
     resources :account_activations, only: :edit

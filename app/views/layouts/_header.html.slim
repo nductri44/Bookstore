@@ -78,17 +78,17 @@ header
                 a.dropdown-item.text-black[href="#!"]
                   | Profile
               li
-                a.dropdown-item.text-black[href=logout_path data-method="delete"]
+                a.dropdown-item.text-black[href=user_logout_path data-method="delete"]
                   | Logout
-        button.btn.btn-light.ms-lg-2[type="submit"]
+        a.btn.btn-light.ms-lg-2[href=user_cart_path(current_user)]
           i.bi-cart-fill.me-1
           |  Cart 
           span.badge.bg-dark.text-white.ms-1.rounded-pill
-            | 0  
+            | 0
       - else
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
           li.nav-item
-            a.nav-link.active.text-white[href=signup_path]
+            a.nav-link.active.text-white[href=user_signup_path]
               | SignUp
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
           li.nav-item
@@ -96,7 +96,7 @@ header
               | SignUp Shop
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
           li.nav-item
-            a.nav-link.active.text-white[href=login_path]
+            a.nav-link.active.text-white[href=user_login_path]
               | Login
         ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-2
           li.nav-item
@@ -106,5 +106,5 @@ header
           i.bi-cart-fill.me-1
           |  Cart 
           span.badge.bg-dark.text-white.ms-1.rounded-pill
-            | 0
+            | 0  
       end

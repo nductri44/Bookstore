@@ -2,10 +2,11 @@ class Product < ApplicationRecord
   has_many :product_categories
   has_many :categories, through: :product_categories
   has_many :cart_items
+  has_many :order_items
 
   has_one_attached :image do |attachable|
     attachable.variant(:thumb, resize_to_limit: [100, 100])
-    attachable.variant(:home, resize_to_limit: [300, 300])
+    attachable.variant(:home, resize_to_limit: [200, 200])
   end
 
   validates :name, presence: true, length: { maximum: 50 }

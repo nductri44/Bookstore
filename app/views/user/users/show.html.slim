@@ -1,8 +1,21 @@
 - provide :title, @user.name
 .row
-  aside.col-md-4 
+  aside.col-md-8 
     section
       h2
+        ' Name:
         = @user.name
-
+        br
+        ' Email:
+        = @user.email
+        br
+        '  Address:
+        = @user.address
+        br
+        ' Phone:
+        = @user.phone
+      
+    = link_to "Edit your profile", edit_user_user_path, class: "btn btn-dark"
+    br
+    = link_to "Delete your account", user_user_path, class: "btn btn-dark mt-3", method: :delete
         

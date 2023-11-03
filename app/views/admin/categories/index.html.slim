@@ -28,6 +28,8 @@ table.table.table-bordered
           table
             tr
               td
+                = link_to "List of Products", admin_category_path(category), class: "btn btn-dark"
+              td
                 = link_to "Edit", edit_admin_category_path(category), class: "btn btn-dark mx-2"
               td
                 = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-dark"

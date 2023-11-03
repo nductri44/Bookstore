@@ -1,2 +1,27 @@
-h2
-  = @category.name
+table.table.table-bordered
+  thead
+    tr
+      th[scope="col"]
+        | Name
+      th[scope="col"]
+        | Description
+      th[scope="col"]
+        | Price
+      th[scope="col"]
+        | Stock
+  tbody 
+    - @products.each do |product|
+      tr
+        th[scope="row"]
+          = product.name
+        td
+          = product.description
+        td
+          = product.price
+        td
+          = product.stock
+
+
+
+
+

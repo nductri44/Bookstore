@@ -9,10 +9,13 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
-    delete 'delete_item', to: 'carts#destroy'
-    resource ''
     resources :users
     resources :carts
+    resources :carts do
+      member do
+        get 'edit'
+      end
+    end
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end

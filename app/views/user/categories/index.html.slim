@@ -1,0 +1,28 @@
+- provide :title, "All categories"
+h2 Category
+
+table.table.table-bordered
+  thead.bg-dark.text-white
+    tr
+      th[scope="col" class="text-center"]
+        | ID
+      th[scope="col" class="text-center"]
+        | Name
+      th[scope="col" class="text-center"]
+        | Description
+      th[scope="col" class="text-center"]
+        | Action
+  tbody
+    - @categories.each do |category|
+      tr
+        th[scope="row"]
+          = category.id
+        td
+          = category.name
+        td
+          = category.description
+        td
+          table
+            tr
+              td
+                = link_to "List of Products", user_category_path(category), class: "btn btn-dark"

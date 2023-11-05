@@ -1,0 +1,21 @@
+body[style="background-color: #f8f6f0;"]
+  .container.px-4.px-lg-5.mt-5
+    .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
+      - @products.each do |product|
+        .card.border-0.rounded.shadow.mx-2.mb-5[style="width: 18rem;"]
+          = image_tag(product.image.variant(:show), :class => "card-img-top rounded-0 center-block") if product.image.attached?
+          .card-body.mt-0.mb-0
+            .row
+              .col-12
+                h4.card-title.fw-bold
+                  = product.name
+                p.card-text.text-danger
+                  = number_to_currency(product.price, unit: "", separator: "", delimiter: ".", precision: 0)
+                  '  VND
+          .row.align-items-center.text-center.g-0
+            .col-12
+              = form_with(url: user_carts_url, local: true) do |f|
+                = f.hidden_field :product_id, value: product.id
+                = f.hidden_field :stock, value: product.stock
+                = f.hidden_field :quantity, value: 1
+                = f.submit "Buy now", class: "snipcart-add-item btn btn-main mb-0 font-weight-bold"  

@@ -1,0 +1,18 @@
+section.section
+  .container.px-4.px-lg-5.mt-5.me-0
+    .row
+      .col-md-5.mb-4.mb-md-0
+        .product-image-slider
+          div
+            = image_tag(@product.image.variant(:show), :class => "img-fluid w-100") if @product.image.attached?
+      .col-lg-6.col-md-7.offset-lg-1
+        h1.font-weight-bold.font-size-40.mb-4
+          = @product.name
+        p.price.py-4.text-danger[style="font-size: 26px;"]
+          = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
+          '  VND
+        button.snipcart-add-item.btn.btn-product.mb-5.font-weight-bold
+          | Add to Cart 
+        .content
+          p
+            = @product.description

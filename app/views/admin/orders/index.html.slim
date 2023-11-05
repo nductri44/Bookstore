@@ -1,0 +1,36 @@
+- @orders.each do |order|
+  .mb-5
+    table.table.table-bordered
+      thead.bg-dark.text-white
+        tr
+          th[scope="col" class="text-center"]
+            | Product
+          th[scope="col" class="text-center"]
+            | Image
+          th[scope="col" class="text-center"]
+            | Price
+          th[scope="col" class="text-center"]
+            | Quantity
+      tbody
+        - order.order_items.each do |item|
+          tr
+            th.align-middle[scope="row"]
+              = item.product.name
+            td
+              = image_tag(item.product.image.variant(:thumb), :class => "center-block") if item.product.image.attached?
+            td.align-middle.text-center
+              = item.product.price
+            td.align-middle.text-center
+              = item.quantity 
+    .bg-light.clearfix
+      h3.pull-left 
+        | Customer name:                                      
+        = order.user.name
+    .bg-light.clearfix
+      h3.pull-left 
+        | Total Cost
+      h3.pull-right
+        = order.total
+        
+    .border__div
+    

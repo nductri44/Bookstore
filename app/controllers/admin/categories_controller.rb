@@ -11,11 +11,6 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def show
-    @products = Category.products_in_category(@category.name)
-
-    return unless @products.nil?
-
-    flash[:danger] = 'Products not found.'
   end
 
   def create

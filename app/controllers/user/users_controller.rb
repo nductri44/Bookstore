@@ -34,13 +34,11 @@ class User::UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user.destroy
-    flash[:success] = 'User deleted'
-    redirect_to(root_url)
-  end
-
   private
+
+  def check_admin
+    render('errors/404') if admin_logged_in?
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :address, :phone)

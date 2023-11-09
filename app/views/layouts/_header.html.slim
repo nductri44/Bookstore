@@ -1,28 +1,5 @@
 - if user_logged_in?
-  .superNav.border-bottom.py-2.bg-light
-    .container
-      .row
-        .col-lg-6.col-md-6.col-sm-12.col-xs-12.centerOnMobile
-          select.me-3.border-0.bg-light
-            option[value="en-us"]
-              | EN-US
-          span.d-none.d-lg-inline-block.d-md-inline-block.d-sm-inline-block.d-xs-none.me-3
-            strong
-              | info@strandbooks.com
-          span.me-3
-            i.fa-solid.fa-phone.me-1.text-danger
-            strong
-              | 1-800-123-1234
-        .col-lg-6.col-md-6.col-sm-12.col-xs-12.d-none.d-lg-block.d-md-block-d-sm-block.d-xs-none.text-end
-          span.me-3
-            i.fa-solid.fa-truck.text-muted.me-1
-            a.text-muted[href="#"]
-              | Shipping
-          span.me-3
-            i.fa-solid.fa-file.text-muted.me-2
-            a.text-muted[href="#"]
-              | Policy
-  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow-sm
+  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow
     .container
       a.navbar-brand[href=home_path]
         i.fa-solid.fa-shop.me-2
@@ -31,29 +8,24 @@
       button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
       .mx-auto.my-3.d-lg-none.d-sm-block.d-xs-block
-        .input-group
+        = form_tag(user_products_path, method: :get, class: 'input-group') do
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
-          / input.form-control.border-warning[type="text" style="color:#7a7a7a"]
-          / button.btn.btn-warning.text-white
-          /   | Search
-          = form_with(model: @product, url: user_products_path, method: :get, local: true) do |f|
-            = f.text_field :search
-            = f.submit('Search', class: "btn btn-danger text-white")
+          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
-          .input-group
+          = form_tag(user_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
-            input.form-control.border-danger[type="text" style="color:#7a7a7a"]
-            button.btn.btn-danger.text-white
-              | Search
+            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.text-uppercase.active[aria-current="page" href=home_path]
+            a.nav-link.mx-2.active[aria-current="page" href=home_path style="font-size: 17px;"]
               | Home
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.text-uppercase.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
@@ -67,16 +39,16 @@
                     = category.name   
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.text-uppercase[href=user_cart_path(current_user)]
-              i.fa-solid.fa-cart-shopping.me-1
-              |  Cart
+            a.nav-link.mx-2[href=user_cart_path(current_user) style="font-size: 17px;"]
+              i.cart-count.bi.bi-cart3[value="#{current_user.count_cart}" style="font-size: 22px;"]
+              | Cart
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.text-uppercase[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
               i.fa-solid.fa-circle-user.me-1
               | Account
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
-                a.dropdown-item.text-black[href=user_user_path(current_user)]
+                a.dropdown-item.text-black[href=edit_user_user_path(current_user)]
                   | Profile
               li
                 a.dropdown-item.text-black[href=user_order_path(current_user)]
@@ -86,62 +58,80 @@
               li
                 a.dropdown-item.text-black[href=user_logout_path data-method="delete"]
                   | Logout
-- else
-  .superNav.border-bottom.py-2.bg-light
-    .container
-      .row
-        .col-lg-6.col-md-6.col-sm-12.col-xs-12.centerOnMobile
-          select.me-3.border-0.bg-light
-            option[value="en-us"]
-              | EN-US
-          span.d-none.d-lg-inline-block.d-md-inline-block.d-sm-inline-block.d-xs-none.me-3
-            strong
-              | info@strandbooks.com
-          span.me-3
-            i.fa-solid.fa-phone.me-1.text-danger
-            strong
-              | 1-800-123-1234
-        .col-lg-6.col-md-6.col-sm-12.col-xs-12.d-none.d-lg-block.d-md-block-d-sm-block.d-xs-none.text-end
-          span.me-3
-            i.fa-solid.fa-truck.text-muted.me-1
-            a.text-muted[href="#"]
-              | Shipping
-          span.me-3
-            i.fa-solid.fa-file.text-muted.me-2
-            a.text-muted[href="#"]
-              | Policy
+- elsif admin_logged_in?
   nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow-sm
     .container
-      a.navbar-brand[href=home_path]
+      a.navbar-brand[href=admin_path]
         i.fa-solid.fa-shop.me-2
-        strong
+        strong.text-danger
           | StrandBooks
       button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
       .mx-auto.my-3.d-lg-none.d-sm-block.d-xs-block
-        .input-group
+        = form_tag(admin_products_path, method: :get, class: 'input-group') do
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
-          / input.form-control.border-warning[type="text" style="color:#7a7a7a"]
-          / button.btn.btn-warning.text-white
-          /   | Search
-          = form_for(model: @product, url: user_products_path, local: true) do |f|
-            = f.text_field :search
-            = f.submit('Search', class: "btn btn-danger text-white")
+          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
-          .input-group
+          = form_tag(admin_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
-            input.form-control.border-danger[type="text" style="color:#7a7a7a"]
-            button.btn.btn-darning.text-white
-              | Search
+            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.text-uppercase.active[aria-current="page" href=home_path]
+            a.nav-link.mx-2.active[aria-current="page" href=admin_path style="font-size: 17px;"]
+              | Home
+          li.nav-item
+            a.nav-link.mx-2.active[aria-current="page" href=admin_categories_path style="font-size: 17px;"]
+              | Category
+          li.nav-item
+            a.nav-link.mx-2.active[aria-current="page" href=admin_products_path style="font-size: 17px;"]
+              | Product
+        ul.navbar-nav.ms-auto
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.text-uppercase[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+              i.fa-solid.fa-circle-user.me-1
+              | Account
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href=edit_admin_admin_path(current_admin)]
+                  | Profile
+              li
+                hr.dropdown-divider
+              li
+                a.dropdown-item.text-black[href=admin_logout_path data-method="delete"]
+                  | Logout
+- else
+  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow-sm
+    .container
+      a.navbar-brand[href=home_path]
+        i.fa-solid.fa-shop.me-2
+        strong.text-danger
+          | StrandBooks
+      button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"]
+        span.navbar-toggler-icon
+      .mx-auto.my-3.d-lg-none.d-sm-block.d-xs-block
+        = form_tag(user_products_path, method: :get, class: 'input-group') do
+          span.border-danger.input-group-text.bg-danger.text-white
+            i.fa-solid.fa-magnifying-glass
+          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+      #navbarNavDropdown.collapse.navbar-collapse
+        .ms-auto.d-none.d-lg-block
+          = form_tag(user_products_path, method: :get, class: 'input-group') do
+            span.border-danger.input-group-text.bg-danger.text-white
+              i.fa-solid.fa-magnifying-glass
+            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+        ul.navbar-nav.ms-auto
+          li.nav-item
+            a.nav-link.mx-2.active[aria-current="page" href=home_path style="font-size: 17px;"]
               | Home
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.text-uppercase.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
@@ -154,8 +144,15 @@
                   a.dropdown-item.text-black[href=user_category_path(category)]
                     = category.name   
         ul.navbar-nav.ms-auto
-          li.nav-item
-            a.nav-link.mx-2.text-uppercase[href=user_login_path]
-              i.fa-solid.fa-cart-shopping.me-1
-              |  Login
-
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+              i.fa-solid.fa-circle-user.me-1
+              | Account
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              li
+                a.dropdown-item.text-black[href=user_login_path]
+                  | Login
+              li
+                a.dropdown-item.text-black[href=user_signup_path]
+                  | Sign Up
+              

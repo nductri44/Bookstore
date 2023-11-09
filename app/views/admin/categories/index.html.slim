@@ -1,36 +1,39 @@
-- provide :title, "All categories"
-h2 Category
+body[style="background-color: #f8f6f0;"]
+  section[style="padding-top: 30px;"]
+    .container.pb-3
+      .row
+        .col-6
+          h3 Categories
+        .col-6
+          a href=new_admin_category_path class="btn btn-secondary mb-4 text-end" style="width:125px; float: right;"
+            | New category
+      .container
+        .row.d-flex.justify-content-center[style="overflow-x:auto;"]
+          table.table.table-bordered.bg-white
+            thead
+              tr
+                th.text-center.col-2
+                  | ID
+                th.text-center.col-4
+                  | Name
+                th.text-center.col-2
+                  | Product
+                th.text-center
+                  | Action
+            tbody
+              - @categories.each do |category|
+                tr
+                  td.text-center
+                    = category.id
+                  td.text-center
+                    = category.name
+                  td.text-center
+                    = category.products.count
+                  td
+                    div[style="display: flex; flex-direction: row; justify-content: center;"]
+                      = link_to "Show", admin_category_path(category), class: "btn btn-secondary mx-2", style: "width: 90px;"
+                      = link_to "Edit", edit_admin_category_path(category), class: "btn btn-secondary mx-2", style: "width: 90px;"
+                      = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-danger mx-2", style: "width: 90px;"
+          = paginate @categories
 
-a href=new_admin_category_path class="btn btn-primary active mb-4" role="button" aria-pressed="true"
-  | New category
-
-table.table.table-bordered
-  thead
-    tr
-      th[scope="col"]
-        | ID
-      th[scope="col"]
-        | Name
-      th[scope="col"]
-        | Description
-      th[scope="col"]
-        | Action
-  tbody
-    - @categories.each do |category|
-      tr
-        th[scope="row"]
-          = category.id
-        td
-          = category.name
-        td
-          = category.description
-        td
-          table
-            tr
-              td
-                = link_to "List of Products", admin_category_path(category), class: "btn btn-dark"
-              td
-                = link_to "Edit", edit_admin_category_path(category), class: "btn btn-dark mx-2"
-              td
-                = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-dark"
 

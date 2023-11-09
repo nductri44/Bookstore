@@ -1,39 +1,39 @@
 body[style="background-color: #f8f6f0;"]
-  .container.px-4.px-lg-5.mt-5
-    h3.fw-bold
-      | Order list
-    - @orders.each do |order|
-      .mb-5
-        table.table.table-bordered
-          thead.bg-dark.text-white
-            tr
-              th[scope="col" class="text-center"]
-                | Product
-              th[scope="col" class="text-center"]
-                | Image
-              th[scope="col" class="text-center"]
-                | Price
-              th[scope="col" class="text-center"]
-                | Quantity
-          tbody
-            - order.order_items.each do |item|
+  section[style="padding-top: 20px;"]
+    .container.pb-3
+      h3.mb-3 Orders
+      .container
+        .row.d-flex.justify-content-center
+          table.table.table-bordered.bg-white
+            thead
               tr
-                th.align-middle[scope="row"]
-                  = item.product.name
-                td
-                  = image_tag(item.product.image.variant(:show), :class => "center-block") if item.product.image.attached?
-                td.align-middle.text-center
-                  = item.product.price
-                td.align-middle.text-center
-                  = item.quantity 
-        .bg-light.clearfix
-          h3.pull-left 
-            | Customer name:                                      
-            = order.user.name
-        .bg-light.clearfix
-          h3.pull-left 
-            | Total Cost
-          h3.pull-right
-            = order.total
-            
-        .border__div
+                th[scope="col"]
+                  | Order ID
+                th[scope="col"]
+                  | Name
+                th[scope="col"]
+                  | Purchased
+                th[scope="col"]
+                  | Date
+                th[scope="col"]
+                  | Total
+                th[scope="col"]
+                  | Action
+            tbody
+              - @orders.each do |order|
+                tr
+                  th[scope="row"]
+                    = order.id
+                  td
+                    = order.name
+                  td
+                    | #{order.order_items.count} 
+                    | items
+                  td
+                    = order.created_at.strftime("%d-%m-%Y")
+                  td
+                    = number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0) 
+                    |  ₫
+                  td
+                    = link_to "Details", admin_order_path(order)
+          = paginate @orders 

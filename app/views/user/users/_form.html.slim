@@ -1,31 +1,18 @@
 = form_with(model: [:user, @user], local: true) do |f|
   = render 'shared/error_messages', object: f.object
-  br
-  = f.label :name
-  br
-  = f.text_field :name, class: 'form-control'
+  = f.label :name, class: "form-label"
+  = f.text_field :name, class: "form-control border border-secondary"
+  = f.label :email, class: "form-label mt-2"
+  = f.email_field :email, class: "form-control border border-secondary"
+  = f.label :address, class: "form-label mt-2"
+  = f.text_field :address, class: "form-control border border-secondary"
+  = f.label :phone, class: "form-label mt-2"
+  = f.text_field :phone, class: "form-control border border-secondary"
+  = f.label :password, class: "form-label mt-2"
+  = f.password_field :password, class: "form-control border border-secondary"
+  = f.label :password_confirmation, class: "form-label mt-2"
+  = f.password_field :password_confirmation, class: "form-control border border-secondary" 
+  .row.mt-3.text-center
+    .col-12
+      = f.submit yield(:button_text), class: "btn btn-danger fw-bold signup-button"
 
-  = f.label :email
-  br
-  = f.email_field :email, class: 'form-control'
-
-  = f.label :password
-  br
-  = f.password_field :password, class: 'form-control'
-
-  = f.label :password_confirmation, 'Confirmation'
-  br
-  = f.password_field :password_confirmation, class: 'form-control'
-  
-  = f.label :address
-  br
-  = f.text_field :address, class: 'form-control'
-
-  = f.label :phone
-  br
-  = f.text_field :phone, class: 'form-control'
-  br
-
-  = f.submit yield(:button_text), class: 'btn btn-primary'
-  
-    

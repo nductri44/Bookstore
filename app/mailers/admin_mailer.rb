@@ -8,4 +8,11 @@ class AdminMailer < ApplicationMailer
     @admin = admin
     mail(to: admin.email, subject: 'Password reset')
   end
+
+  def order_notification(admin, order, items)
+    @admin = admin
+    @order = order
+    @items = items
+    mail(to: admin.email, subject: 'Order notification')
+  end
 end

@@ -7,7 +7,7 @@ class User::SessionsController < ApplicationController
       if user.activated?
         user_log_in(user)
         params[:session][:remember_me] == '1' ? user_remember(user) : user_forget(user)
-        redirect_back_or(root_path)
+        redirect_back_or(home_path)
       else
         message = 'Account not activated.'
         message += ' Check your email for the activation link.'

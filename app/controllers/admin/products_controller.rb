@@ -7,7 +7,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(4)
+    @search_text = params[:search]
   end
 
   def show; end

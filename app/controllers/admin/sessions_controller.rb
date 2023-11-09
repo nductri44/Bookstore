@@ -1,5 +1,7 @@
 class Admin::SessionsController < ApplicationController
-  def new; end
+  def new
+    @hidden_header = true
+  end
 
   def create
     admin = Admin.find_by(email: params[:session][:email].downcase)
@@ -22,6 +24,6 @@ class Admin::SessionsController < ApplicationController
 
   def destroy
     admin_log_out
-    redirect_to(home_path)
+    redirect_to(admin_path)
   end
 end

@@ -10,17 +10,20 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :users
-    resources :carts
+    resources :categories
+    resources :products
     resources :carts do
-      member do
-        get 'edit'
+      collection do
+        patch 'update_cart', to: 'carts#update_cart'
       end
     end
+    resources :orders
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end
 
   namespace :admin do
+    get '/', to: 'static_pages#home'
     get 'signup', to: 'admins#new'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
     resources :admins
     resources :categories
     resources :products
+    resources :orders
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end

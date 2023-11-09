@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   before_save :downcase_email
   before_create :create_activation_digest
@@ -11,6 +12,12 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  validates :address, presence: true
+  validates :phone, presence: true, numericality: true, length: { minimum: 10, maximum: 15 }
+
+  def count_cart
+    cart.cart_items.count
+  end
 
   # Returns the hash digest of the given string.
   def self.digest(string)

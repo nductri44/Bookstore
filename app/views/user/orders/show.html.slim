@@ -1,82 +1,69 @@
-/ - @orders.each do |order|
-/   .mb-5
-/     table.table.table-bordered
-/       thead.bg-dark.text-white
-/         tr
-/           th[scope="col" class="text-center"]
-/             | Product
-/           th[scope="col" class="text-center"]
-/             | Image
-/           th[scope="col" class="text-center"]
-/             | Price
-/           th[scope="col" class="text-center"]
-/             | Quantity
-/       tbody
-/         - order.order_items.each do |item|
-/           tr
-/             th.align-middle[scope="row"]
-/               = item.product.name
-/             td
-/               = image_tag(item.product.image.variant(:thumb), :class => "center-block") if item.product.image.attached?
-/             td.align-middle.text-center
-/               = item.product.price
-/             td.align-middle.text-center
-/               = item.quantity
-
-/     .bg-light.clearfix
-/       h3.pull-left 
-/         | Total Cost
-/       h3.pull-right
-/         = order.total
-        
-/     .border__div
-    
-
 body[style="background-color: #f8f6f0;"]
-  - @orders.each do |order|
-    section
+  section[style="padding-top: 20px;"]
+    .container.pb-2
+      h3 Order history
+    .mx-5.px-5
+    - @orders.each do |order|
       .container
-        .row.d-flex.justify-content-center.py-3
+        .row.d-flex.justify-content-center
           .col-12
             .card.card-registration.card-registration-2.card-margin-order[style="border-radius: 15px;"]
               .card-body.p-0
                 .row.g-0
                   .col-lg-12
-                    .p-5
-                      .d-flex.justify-content-between.align-items-center.mb-0
-                        h3.fw-bold.mb-0.text-black
-                          | Order Details
-                        h6.mb-0.text-muted
-                          | 3 items
+                    .px-5.py-4
+                      .row.mb-2.d-flex.justify-content-between.align-items-center
+                        .col-1
+                          h6 Order ID
+                          h6.fw-bold ##{order.id}
+                        .col-2
+                          h6 Date of Placement
+                          h6.fw-bold = order.created_at.strftime("%d-%m-%Y")
+                        .col-2
+                          h6 Time of Placement
+                          h6.fw-bold = order.created_at.strftime("%H:%M:%S")
+                        .col-6.text-end
+                          h6 Total payment
+                          h6.fw-bold #{number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0)} ₫
+                          
+                      hr.mb-2.mt-2
+                      .d-flex.justify-content-between.align-items-center.mb-0 
+                        h6.fw-bold.mb-0.text-muted[style="padding-left: 2px;"]
+                          | Product
+                        h6.fw-bold.mb-0.text-muted
+                          | Amount
+                        h6.fw-bold.mb-0.text-muted
+                          | Price
                       - order.order_items.each do |item|
-                        hr.my-4
-                        .row.mb-4.d-flex.justify-content-between.align-items-center
-                          .col-md-2.col-lg-2.col-xl-1
-                            = image_tag(item.product.image.variant(:show), :class => "img-fluid rounded-2") if item.product.image.attached?
-                          .col-md-3.col-lg-3.col-xl-3
-                            h6.text-black.mb-0.font-weight-600
+                        hr.mb-2.mt-2
+                        .row.mb-2.d-flex.justify-content-between.align-items-center
+                          .col-2
+                            = image_tag(item.product.image.variant(:show), :class => "img-fluid rounded-2", :style => "height: 65px;") if item.product.image.attached?
+                          .col-3
+                            h6.text-black.mb-0.
                               = item.product.name
-                          .col-md-3.col-lg-2.col-xl-2.offset-lg-1
-                            h6.mb-0.text-muted.font-weight-400
+                          .col-2
+                            h6.mb-0.text-black.text-center
                               ' x
                               = item.quantity
-                          .col-md-4.col-lg-1.col-xl-1.text-end
-                            h6.mb-0.text-danger.font-weight-400
+                          .col-5.text-end
+                            h6.mb-0.text-black
                               = number_to_currency(item.product.price, unit: "", separator: "", delimiter: ".", precision: 0)
-                              '  VND
-                      hr.my-4
-                      .row.justify-content-md-center
-                        .col
-                        .col-md-auto
-                          h4.fw-bold.mb-0.text-black
-                            | Total payment:      
-                        .col.col-lg-3.d-flex.flex-row-reverse
-                          h4.fw-bold.mb-0.text-danger
-                            = number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0)
-                            '  VND
-                      .pt-0
-                        h6.mt-3
-                          a.text-body.text-muted[href="#!" style="text-decoration: none; font-size: 18px;"]
-                            i.bi.bi-arrow-left.me-2
-                            | Back to shop
-  
+                              '  ₫
+                      hr.mb-4.mt-2
+                      .row.mb-2.d-flex.justify-content-between.align-items-center
+                        .col-12
+                          h6
+                          | Name: 
+                          = order.name 
+                          h6
+                          | Email: 
+                          = order.email
+                          h6
+                          | Address: 
+                          = order.address
+                          h6
+                          | Phone: 
+                          = order.phone
+    = paginate @orders
+                          

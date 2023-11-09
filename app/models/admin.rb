@@ -9,6 +9,9 @@ class Admin < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  validates :address, presence: true
+  validates :phone, presence: true, numericality: true, length: { minimum: 10, maximum: 15 }
+  validates :tax_code, presence: true, numericality: true
 
   # Returns the hash digest of the given string.
   def self.digest(string)

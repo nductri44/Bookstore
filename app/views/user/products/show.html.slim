@@ -6,13 +6,29 @@ section.section
           div
             = image_tag(@product.image.variant(:show), :class => "img-fluid w-100") if @product.image.attached?
       .col-lg-6.col-md-7.offset-lg-1
-        h1.font-weight-bold.font-size-40.mb-4
+        h3.font-weight-bold.mb-4
           = @product.name
-        p.price.py-4.text-danger[style="font-size: 26px;"]
+        h6[style="font-size: 12px;"]
+          | Author: 
+          = @product.author
+        h6[style="font-size: 12px;"]
+          | Publisher: 
+          = @product.publisher
+        p.fw-bold.py-2.text-danger[style="font-size: 28px;"]
           = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
-          '  VND
-        button.snipcart-add-item.btn.btn-product.mb-5.font-weight-bold
-          | Add to Cart 
+          '  ₫
+          = form_with(url: user_carts_url, local: true) do |f|
+            = f.hidden_field :product_id, value: @product.id
+            = f.hidden_field :stock, value: @product.stock
+            .row.pb-4
+              .col-6[style="display: flex; flex-direction: row;"]
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
+                  i.bi.bi-dash-lg
+                = f.number_field :quantity, class: "form-control form-control-sm text-center", min: 1, value: 1, type: :number, style: "width: 50px;"
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
+                  i.bi.bi-plus-lg
+            = f.submit "Add to cart", class: "snipcart-add-item btn btn-product mb-4 font-weight-bold" 
         .content
-          p
+          p 
             = @product.description
+

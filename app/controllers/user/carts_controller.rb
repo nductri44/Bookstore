@@ -1,61 +1,53 @@
 class User::CartsController < ApplicationController
   before_action :logged_in_user
   before_action :set_cart
-  before_action :set_cart_item, only: %i[edit update destroy]
+  before_action :set_cart_item, only: %i[edit destroy]
 
   def show
-    @cart = Cart.find(params[:id])
     total_price
   end
 
   def create
     @cart_item = @cart.cart_items.find_by(product_id: params[:product_id])
-    if @cart_item
-      @cart_item.update(quantity: @cart_item.quantity + params[:quantity].to_i)
+    if params[:quantity].to_i > params[:stock].to_i
+      flash[:danger] = 'Not enough stock!'
+      redirect_to(request.referrer)
     else
-      @cart_item = @cart.cart_items.build(product_id: params[:product_id], quantity: params[:quantity].to_i)
-    end
-    if @cart_item.save
-      @cart.update(total: total_price)
-      flash[:success] = 'Add to cart success!'
-      redirect_to(user_cart_url(@cart))
-    else
-      flash[:danger] = 'Cannot add to cart!'
-      render('home')
+      if @cart_item
+        @cart_item.update(quantity: @cart_item.quantity + params[:quantity].to_i)
+      else
+        @cart_item = @cart.cart_items.build(product_id: params[:product_id], quantity: params[:quantity].to_i)
+      end
+      if @cart_item.save
+        flash[:success] = 'Add to cart success!'
+        @cart.update(total: total_price)
+
+        redirect_to(request.referrer)
+      else
+        flash[:danger] = 'Cannot add to cart!'
+      end
     end
   end
 
-  def edit; end
-
-  def update
-    if @cart_item.update(cart_item_params)
-      flash[:success] = 'Update success.'
-      redirect_to(user_cart_url(@cart))
-    else
-      flash[:danger] = 'Update failed.'
-      render('edit')
+  def update_cart
+    updates = params[:updates]
+    updates.each do |update|
+      @cart_item = CartItem.find_by(product_id: update[:product_id])
+      @cart_item.update(quantity: update[:quantity]) if @cart_item
     end
+
+    @cart = current_user.cart
+    @cart.update(total: total_price)
   end
 
   def destroy
     @cart_item.destroy
+    @cart.update(total: total_price)
     flash[:success] = 'Delete item success'
     redirect_to(user_cart_url(@cart))
   end
 
-  def total_price
-    @total_price ||= 0
-    @cart.cart_items.each do |item|
-      @total_price += item.product.price * item.quantity.to_i
-    end
-    @total_price
-  end
-
   private
-
-  def cart_item_params
-    params.require(:cart_item).permit(:product_id, :quantity)
-  end
 
   def set_cart
     @cart = current_user.cart
@@ -63,5 +55,13 @@ class User::CartsController < ApplicationController
 
   def set_cart_item
     @cart_item = @cart.cart_items.find_by(id: params[:id])
+  end
+
+  def total_price
+    price = []
+    @cart.cart_items.each do |item|
+      price << (item.product.price * item.quantity.to_i)
+    end
+    @total_price = price.sum
   end
 end

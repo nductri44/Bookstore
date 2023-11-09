@@ -1,12 +1,8 @@
 class User::CategoriesController < ApplicationController
   before_action :set_category, only: %i[show]
 
-  def index
-    @categories = Category.all
-  end
-
   def show
-    @products = @category.products
+    @products = @category.products.page(params[:page]).per(4)
   end
 
   private

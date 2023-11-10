@@ -59,7 +59,7 @@
                 a.dropdown-item.text-black[href=user_logout_path data-method="delete"]
                   | Logout
 - elsif admin_logged_in?
-  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow-sm
+  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow
     .container
       a.navbar-brand[href=admin_path]
         i.fa-solid.fa-shop.me-2
@@ -92,7 +92,7 @@
               | Product
         ul.navbar-nav.ms-auto
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.text-uppercase[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
               i.fa-solid.fa-circle-user.me-1
               | Account
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
@@ -105,7 +105,7 @@
                 a.dropdown-item.text-black[href=admin_logout_path data-method="delete"]
                   | Logout
 - else
-  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow-sm
+  nav.navbar.navbar-expand-lg.bg-white.sticky-top.navbar-light.p-3.shadow
     .container
       a.navbar-brand[href=home_path]
         i.fa-solid.fa-shop.me-2

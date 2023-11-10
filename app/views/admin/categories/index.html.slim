@@ -1,39 +1,38 @@
-body[style="background-color: #f8f6f0;"]
-  section[style="padding-top: 30px;"]
-    .container.pb-3
-      .row
-        .col-6
-          h3 Categories
-        .col-6
-          a href=new_admin_category_path class="btn btn-secondary mb-4 text-end" style="width:125px; float: right;"
-            | New category
-      .container
-        .row.d-flex.justify-content-center[style="overflow-x:auto;"]
-          table.table.table-bordered.bg-white
-            thead
+.[style="background-color: #f8f6f0; display: flex"]
+  .container.pb-3[style="padding-top: 30px;"]
+    .row
+      .col-6
+        h3 Categories
+      .col-6
+        a href=new_admin_category_path class="button danger text-danger mb-4 text-center" style="width:135px; float: right;"
+          | New category
+    .container
+      .row.d-flex.justify-content-center[style="overflow-x:auto;"]
+        table.table.table-bordered.bg-white
+          thead
+            tr
+              th.text-center.col-2
+                | ID
+              th.text-center.col-4
+                | Name
+              th.text-center.col-2
+                | Product
+              th.text-center
+                | Action
+          tbody
+            - @categories.each do |category|
               tr
-                th.text-center.col-2
-                  | ID
-                th.text-center.col-4
-                  | Name
-                th.text-center.col-2
-                  | Product
-                th.text-center
-                  | Action
-            tbody
-              - @categories.each do |category|
-                tr
-                  td.text-center
-                    = category.id
-                  td.text-center
-                    = category.name
-                  td.text-center
-                    = category.products.count
-                  td
-                    div[style="display: flex; flex-direction: row; justify-content: center;"]
-                      = link_to "Show", admin_category_path(category), class: "btn btn-secondary mx-2", style: "width: 90px;"
-                      = link_to "Edit", edit_admin_category_path(category), class: "btn btn-secondary mx-2", style: "width: 90px;"
-                      = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-danger mx-2", style: "width: 90px;"
-          = paginate @categories
+                td.text-center
+                  = category.id
+                td.text-center
+                  = category.name
+                td.text-center
+                  = category.products.count
+                td
+                  div[style="display: flex; flex-direction: row; justify-content: center;"]
+                    = link_to "Show", admin_category_path(category), class: "button danger mx-2 text-danger", style: "width: 90px;"
+                    = link_to "Edit", edit_admin_category_path(category), class: "button danger mx-2 text-danger", style: "width: 90px;"
+                    = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-danger mx-2", style: "width: 90px; font-weight: bold;"
+        = paginate @categories
 
 

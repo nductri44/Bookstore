@@ -1,4 +1,4 @@
-.[style="background-color: #f8f6f0;"]
+.[style="background-color: #f8f6f0; display: flex;"]
   .container.py-4.h-100
     .row.d-flex.justify-content-center.h-100
       .col-12
@@ -19,8 +19,6 @@
                     .d-flex.justify-content-between.align-items-center.pb-3
                       h5.fw-bold.mb-0.text-black
                         | Shopping Cart
-                      h6.mb-0.text-muted
-                        |
                     - @cart.cart_items.each do |item|
                       hr.mb-2.mt-2
                       .row.mb-2.d-flex.justify-content-between.align-items-center.cart-item-row
@@ -32,7 +30,7 @@
                         .col-md-3.col-lg-3.col-xl-3.d-flex
                           button.button-subtract.btn.btn-link.px-2.mx-1
                             i.bi.bi-dash-lg
-                          input.quantity-input.form-control.form-control-sm[min="1" max="9999" name="quantity" value="#{item.quantity}" type="number" style="text-align: center; width: 30%;" data-product-id="#{item.product.id}" disabled="true"]
+                          input#quantity-range.quantity-input.form-control.form-control-sm.text-center[min="1" max="9999" name="quantity" value="#{item.quantity}" type="text" style="text-align: center; width: 25%;" data-product-id="#{item.product.id}"]
                           button.button-add.btn.btn-link.px-2.mx-1
                             i.bi.bi-plus-lg
                         .col-md-3.col-lg-2.col-xl-2
@@ -56,5 +54,16 @@
                         | Back to shop
                       a[href=new_user_order_path(current_user) role="button" class="btn btn-danger btn-lg text-white font-weight-bold btn-cart-checkout" data-mdb-ripple-color="dark"]
                         | Checkout
+javascript:
+  document.getElementById('quantity-range').onkeypress =
+  function (e) {
+    var ev = e || window.event;
+    if(ev.charCode < 48 || ev.charCode > 57) {
+      return false; // not a digit
+    } else if(this.value * 10 + ev.charCode - 48 > this.max) {
+       return false;
+    } else {
+       return true;
+    }
+  }           
 
-              

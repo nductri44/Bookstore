@@ -1,24 +1,54 @@
 /* @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/** Body **/
 
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/** Header **/
+
+a {
+  font-size: 14px;
+  font-weight: 700
 }
 
-/** Body End **/
+.superNav {
+  font-size: 13px;
+}
+
+.form-control {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media screen and (max-width:540px) {
+  .centerOnMobile {
+    text-align: center
+  }
+}
+
+.input-custom {
+  height: 50px;
+}
+
+.bi-cart3:after {
+  content: attr(value);
+  font-size: 12px;
+  color: #fff;
+  background: #dc3545;
+  border-radius: 50%;
+  padding: 0 5px;
+  position: relative;
+  left: -8px;
+  top: -10px;
+  opacity: 0.9;
+}
+
+/** Header End **/
 
 
-/** Footer **/
+
+/** Error **/
 
 
-/** Footer End **/
-
-
-#error_explanation {
+/* #error_explanation {
   color: red;
 
   ul {
@@ -33,24 +63,21 @@ body {
   .form-control {
     color: $state-danger-text;
   }
-} */
+} */ */
 
-/** Bootstrap **/
+/** Input Hide Arrows **/
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
   margin: 0;
-  /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 input[type=number] {
   -moz-appearance: textfield;
-  /* Firefox */
 }
 
-/** Bootstrap End **/
+/** Input Hide Arrows End **/
 
 /** Errors **/
 
@@ -120,47 +147,6 @@ input[type=number] {
 
 /** Sign Up Form End **/
 
-
-/** Header **/
-
-a {
-  font-size: 14px;
-  font-weight: 700
-}
-
-.superNav {
-  font-size: 13px;
-}
-
-.form-control {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-@media screen and (max-width:540px) {
-  .centerOnMobile {
-    text-align: center
-  }
-}
-
-.input-custom {
-  height: 50px;
-}
-
-.bi-cart3:after {
-  content: attr(value);
-  font-size: 12px;
-  color: #fff;
-  background: #dc3545;
-  border-radius: 50%;
-  padding: 0 5px;
-  position: relative;
-  left: -8px;
-  top: -10px;
-  opacity: 0.9;
-}
-
-/** Header End **/
 
 /** Show product **/
 
@@ -364,4 +350,30 @@ select {
 /** Form Product End **/
 
 
+/** Admin **/
 
+.button {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 6px ;
+  font-size: 16px;
+  font-weight: 200px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+
+/** Admin End **/

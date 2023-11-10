@@ -115,29 +115,6 @@ $(document).ready(function() {
   });
 
 
-
-
-  // $('.order-confirm').on('click', function(e) {
-  //   e.preventDefault();
-  //   $.post("/user/orders",
-  //     {},
-  //     function(data) {
-  //       if (data.errors.length > 0) {
-  //           Swal.fire({
-  //           icon: "error",
-  //           title: "Oops...",
-  //           text: data.errors,
-  //           footer: '<a href="#">Why do I have this issue?</a>'
-  //         });
-  //       } else {
-  //           alert(data.success);
-  //           window.location.href = "/home";
-  //       }
-  //     }
-  //   );
-  // });
-
-
   
   // function updateTotalPrice(price) {
   //   var totalPrice = $('#total-price').data("price") + price;
@@ -148,6 +125,54 @@ $(document).ready(function() {
   function formatPrice(amount) {
     return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   }
+
+
+
+  $('.add-to-cart').on('click', function(e) {
+    e.preventDefault();
+    var productId = $(this).parent().find('.product-id').val();
+    var stock = $(this).parent().find('.stock').val();
+    var quantity = $(this).parent().find('.quantity').val();
+    var adds = [];
+
+    var cart = {
+      adds: adds
+    };
+
+    var add = {
+      product_id: productId,
+      stock: stock,
+      quantity: quantity,
+    }
+
+    adds.push(add);
+
+    $.ajax({
+      url: '/user/carts/add_to_cart',
+      method: 'POST',
+      data: JSON.stringify(cart),
+      contentType: 'application/json',
+    }).done(function(data) {
+      $('.cart-count').attr('value', data.cart_count);
+      if (stock == 0 ) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Cannot add to cart!",
+          footer: "This product is out of stock."
+        });
+      } else {
+        Swal.fire({
+          position: "top-start",
+          icon: "success",
+          title: "Add to cart success!",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+  });
+
 
 
 });

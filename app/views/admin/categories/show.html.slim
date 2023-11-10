@@ -1,56 +1,55 @@
-body[style="background-color: #f8f6f0;"]
-  section[style="padding-top: 20px;"]
-    .container.pb-3
-      .row
-        .col-6
-          h3 
-            = @category.name
-      .container
-        .row.d-flex.justify-content-center[style="overflow-x:auto;"]
-          table.table.table-bordered.bg-white
-            thead
+.[style="background-color: #f8f6f0; padding-top: 20px; min-height: 500px;"]
+  .container.pb-3
+    .row
+      .col-6
+        h3 
+          = @category.name
+    .container
+      .row.d-flex.justify-content-center[style="overflow-x:auto;"]
+        table.table.table-bordered.bg-white
+          thead
+            tr
+              th.text-center
+                | ID
+              th.text-center
+                | Image
+              th.text-center
+                | Name
+              th.text-center
+                | Category
+              th.text-center
+                | Price
+              th.text-center
+                | Stock
+              th.text-center
+                | Action
+          tbody
+            - @products.each do |product|
               tr
-                th.text-center
-                  | ID
-                th.text-center
-                  | Image
-                th.text-center
-                  | Name
-                th.text-center
-                  | Category
-                th.text-center
-                  | Price
-                th.text-center
-                  | Stock
-                th.text-center
-                  | Action
-            tbody
-              - @products.each do |product|
-                tr
-                  td.text-center
-                    = product.id
-                  td.col-1
-                    = image_tag(product.image.variant(:show), :style => "height: 130px;") if product.image.attached?
-                  td
-                    = product.name
-                  td.col-2.text-center
-                    - product.categories.each do |category|
-                      div[style="display: flex; flex-direction: column;"]
-                        = category.name
-                  td.text-center
-                    = number_to_currency(product.price, unit: "", separator: "", delimiter: ".", precision: 0) 
-                    |  ₫
-                  td.text-center
-                    = product.stock          
-                  td.col-2
+                td.text-center
+                  = product.id
+                td.col-1
+                  = image_tag(product.image.variant(:show), :style => "height: 130px;") if product.image.attached?
+                td
+                  = product.name
+                td.col-2.text-center
+                  - product.categories.each do |category|
                     div[style="display: flex; flex-direction: column;"]
-                      div[style="display: flex; justify-content: center;"]
-                        = link_to "Show", admin_product_path(product), class: "btn btn-secondary my-1", style: "width: 90px;"
-                      div[style="display: flex; justify-content: center;"]
-                        = link_to "Edit", edit_admin_product_path(product), class: "btn btn-secondary my-1", style: "width: 90px;"
-                      div[style="display: flex; justify-content: center;"]
-                        = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-danger my-1", style: "width: 90px;"
-          = paginate @products 
+                      = category.name
+                td.text-center
+                  = number_to_currency(product.price, unit: "", separator: "", delimiter: ".", precision: 0) 
+                  |  ₫
+                td.text-center
+                  = product.stock          
+                td.col-2
+                  div[style="display: flex; flex-direction: column;"]
+                    div[style="display: flex; justify-content: center;"]
+                      = link_to "Show", admin_product_path(product), class: "button danger my-1", style: "width: 90px;"
+                    div[style="display: flex; justify-content: center;"]
+                      = link_to "Edit", edit_admin_product_path(product), class: "button danger my-1", style: "width: 90px;"
+                    div[style="display: flex; justify-content: center;"]
+                      = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-danger my-1", style: "width: 90px; font-weight: bold;"
+        = paginate @products 
 
 
 

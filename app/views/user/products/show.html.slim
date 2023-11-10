@@ -1,12 +1,11 @@
-section.section
-  .container.px-4.px-lg-5.mt-5.me-0
+.[style="display: flex; min-height: 520px;"]
+  .container.px-4.mt-5  
     .row
       .col-md-5.mb-4.mb-md-0
-        .product-image-slider
-          div
-            = image_tag(@product.image.variant(:show), :class => "img-fluid w-100") if @product.image.attached?
+        div
+          = image_tag(@product.image.variant(:show), :class => "img-fluid w-100") if @product.image.attached?
       .col-lg-6.col-md-7.offset-lg-1
-        h3.font-weight-bold.mb-4
+        h3.font-weight-bold.mb-3
           = @product.name
         h6[style="font-size: 12px;"]
           | Author: 
@@ -17,18 +16,19 @@ section.section
         p.fw-bold.py-2.text-danger[style="font-size: 28px;"]
           = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
           '  ₫
-          = form_with(url: user_carts_url, local: true) do |f|
-            = f.hidden_field :product_id, value: @product.id
-            = f.hidden_field :stock, value: @product.stock
-            .row.pb-4
-              .col-6[style="display: flex; flex-direction: row;"]
-                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
-                  i.bi.bi-dash-lg
-                = f.number_field :quantity, class: "form-control form-control-sm text-center", min: 1, value: 1, type: :number, style: "width: 50px;"
-                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
-                  i.bi.bi-plus-lg
-            = f.submit "Add to cart", class: "snipcart-add-item btn btn-product mb-4 font-weight-bold" 
+        h6.text-danger.pb-2[style="font-size: 14px;"] #{@product.stock} left in stock.
+        = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
+          = f.hidden_field :product_id, value: @product.id, class: "product-id"
+          = f.hidden_field :stock, value: @product.stock, class: "stock"
+          .row.pb-4
+            .col-6[style="display: flex; flex-direction: row;"]
+              a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
+                i.bi.bi-dash-lg
+              = f.number_field :quantity, class: "quantity form-control form-control-sm text-center", min: 1, value: 1, type: :number, style: "width: 50px;"
+              a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
+                i.bi.bi-plus-lg
+          = f.submit "Add to cart", class: "add-to-cart snipcart-add-item btn btn-product mb-3 font-weight-bold" 
         .content
-          p 
+          h6.text-justify
             = @product.description
 

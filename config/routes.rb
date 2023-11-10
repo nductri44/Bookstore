@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :products
     resources :carts do
       collection do
+        post 'add_to_cart', to: 'carts#add_to_cart'
         patch 'update_cart', to: 'carts#update_cart'
       end
     end

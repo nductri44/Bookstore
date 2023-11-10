@@ -29,6 +29,22 @@ class User::CartsController < ApplicationController
     end
   end
 
+  def add_to_cart
+    adds = params[:adds]
+    adds.each do |add|
+      @cart_item = CartItem.find_by(product_id: add[:product_id])
+      next if add[:quantity].to_i > add[:stock].to_i
+
+      if @cart_item
+        @cart_item.update(quantity: @cart_item.quantity + add[:quantity])
+      else
+        @cart_item = @cart.cart_items.build(product_id: add[:product_id], quantity: add[:quantity])
+      end
+      @cart_item.save
+      @cart.update(total: total_price)
+    end
+  end
+
   def update_cart
     updates = params[:updates]
     updates.each do |update|

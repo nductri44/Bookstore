@@ -28,7 +28,7 @@ class User::UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'Profile updated'
-      redirect_to(user_user_url)
+      redirect_to(root_url)
     else
       render('edit')
     end

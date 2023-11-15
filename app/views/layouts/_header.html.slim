@@ -11,21 +11,21 @@
         = form_tag(user_products_path, method: :get, class: 'input-group') do
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
-          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
           = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(user_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
-            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
             = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.active[aria-current="page" href=home_path style="font-size: 17px;"]
+            a.nav-link.mx-2.active.header-name[aria-current="page" href=home_path]
               | Home
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
@@ -39,13 +39,12 @@
                     = category.name   
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2[href=user_cart_path(current_user) style="font-size: 17px;"]
-              i.cart-count.bi.bi-cart3[value="#{current_user.count_cart}" style="font-size: 22px;"]
-              | Cart
+            a.nav-link[href=user_carts_path]
+              i.cart-count.bi.bi-cart3.cart-icon[value="#{current_user.count_cart}"]
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               i.fa-solid.fa-circle-user.me-1
-              | Account
+              = current_user.name
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
                 a.dropdown-item.text-black[href=edit_user_user_path(current_user)]
@@ -71,30 +70,30 @@
         = form_tag(admin_products_path, method: :get, class: 'input-group') do
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
-          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
           = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(admin_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
-            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
             = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.active[aria-current="page" href=admin_path style="font-size: 17px;"]
+            a.nav-link.mx-2.active.header-name[aria-current="page" href=admin_path]
               | Home
           li.nav-item
-            a.nav-link.mx-2.active[aria-current="page" href=admin_categories_path style="font-size: 17px;"]
+            a.nav-link.mx-2.active.header-name[aria-current="page" href=admin_categories_path]
               | Category
           li.nav-item
-            a.nav-link.mx-2.active[aria-current="page" href=admin_products_path style="font-size: 17px;"]
+            a.nav-link.mx-2.active.header-name[aria-current="page" href=admin_products_path]
               | Product
         ul.navbar-nav.ms-auto
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               i.fa-solid.fa-circle-user.me-1
-              | Account
+              = current_admin.name
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
                 a.dropdown-item.text-black[href=edit_admin_admin_path(current_admin)]
@@ -117,21 +116,21 @@
         = form_tag(user_products_path, method: :get, class: 'input-group') do
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
-          = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+          = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
           = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(user_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
-            = text_field_tag :search, @search_text, class: "form-control border-danger", style: 'color:#7a7a7a'
+            = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
             = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
         ul.navbar-nav.ms-auto
           li.nav-item
-            a.nav-link.mx-2.active[aria-current="page" href=home_path style="font-size: 17px;"]
+            a.nav-link.mx-2.active.header-name[aria-current="page" href=home_path]
               | Home
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
@@ -145,7 +144,7 @@
                     = category.name   
         ul.navbar-nav.ms-auto
           li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.mx-2[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 17px;"]
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               i.fa-solid.fa-circle-user.me-1
               | Account
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]

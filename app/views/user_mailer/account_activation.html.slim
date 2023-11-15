@@ -1,6 +1,0 @@
-h1 StrandBooks
-p Hi
-= @user.name
-p Welcome to StrandBooks! Click on the link below to activate your account:
-
-= link_to 'Activate', edit_user_account_activation_url(@user.activation_token, email: @user.email)

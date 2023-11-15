@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .header {
+      background-color: #dc3545;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .fw-bold {
+      font-weight: 700;
+    }
+    .color-purple {
+      color: purple;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .text-bottom-pl {
+      padding-left: 10px;
+    }
+    .color-red {
+      color: #dc3545;
+    }
+    .color-white {
+      color: white;
+    }
+    .button {
+      background-color: #dc3545;
+      border-radius: 8px;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .d-flex {
+      display: flex;
+    }
+    .justify-content-center {
+      justify-content: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2 class="color-white text-center"> StrandBooks </h2>
+    </div>
+    <h3> Activate Your StrandBooks Account </h3>
+
+    <p>Hi <%= @user.name%>, </p> 
+    <p>Thank you for your registration.</p>
+
+    <p>Please click the "Activate" below to activate your account first. </p>
+
+    <div class="d-flex justify-content-center">
+      <%= link_to 'Activate', edit_user_account_activation_url(@user.activation_token, email: @user.email), class: "button text-center text-white " %>
+    </div>
+  </div>
+</body>
+

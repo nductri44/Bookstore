@@ -1,13 +1,13 @@
-.[style="background-color: #f8f6f0; display: flex"]
-  .container.pb-3[style="padding-top: 30px;"]
+.section
+  .container.pb-3.pt-30
     .row
       .col-6
         h3 Categories
       .col-6
-        a href=new_admin_category_path class="button danger text-danger mb-4 text-center" style="width:135px; float: right;"
+        a href=new_admin_category_path class="button danger mb-4 text-center btn-category"
           | New category
     .container
-      .row.d-flex.justify-content-center[style="overflow-x:auto;"]
+      .row.d-flex.justify-content-center.overflow-auto
         table.table.table-bordered.bg-white
           thead
             tr
@@ -29,10 +29,10 @@
                 td.text-center
                   = category.products.count
                 td
-                  div[style="display: flex; flex-direction: row; justify-content: center;"]
-                    = link_to "Show", admin_category_path(category), class: "button danger mx-2 text-danger", style: "width: 90px;"
-                    = link_to "Edit", edit_admin_category_path(category), class: "button danger mx-2 text-danger", style: "width: 90px;"
-                    = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-danger mx-2", style: "width: 90px; font-weight: bold;"
+                  div.d-flex.flex-row.justify-content-center
+                    = link_to "Show", admin_category_path(category), class: "button danger btn-action mx-2"
+                    = link_to "Edit", edit_admin_category_path(category), class: "button danger btn-action mx-2"
+                    = link_to "Delete", admin_category_path(category), method: :delete, class: "delete-button btn btn-danger btn-action mx-2 fw-bold"
         = paginate @categories
 
 

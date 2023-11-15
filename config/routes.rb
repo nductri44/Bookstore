@@ -37,5 +37,10 @@ Rails.application.routes.draw do
     resources :password_resets, only: %i[new create edit update]
   end
 
+  get '*all',
+      to: redirect { |_, req| "/?404=#{req.path}" },
+      constraints: lambda { |req|
+                     req.path.exclude?('rails/active_storage')
+                   }
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

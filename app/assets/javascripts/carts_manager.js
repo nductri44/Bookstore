@@ -173,4 +173,24 @@ $(document).ready(function() {
     });
   });
 
+
+  // $('.delete-button').on('click', function(e){
+  //   e.preventDefault();
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: 'This action cannot be undone!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, do it!',
+  //     cancelButtonText: 'No, cancel!',
+  //     reverseButtons: true 
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire('Action performed!', 'You clicked Yes!', 'success');
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       Swal.fire('Action cancelled', 'You clicked No!', 'error');
+  //     }
+  //   });
+  // });
+
 });

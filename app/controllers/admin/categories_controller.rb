@@ -39,7 +39,7 @@ class Admin::CategoriesController < ApplicationController
     @category.products.each do |product|
       next unless product.categories.count == 1
 
-      cart_item = CartItem.find(product.id)
+      cart_item = CartItem.find_by(product_id: product.id)
       cart_item.destroy
       product.destroy
     end

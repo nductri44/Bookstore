@@ -4,6 +4,7 @@ class Admin::AdminsController < ApplicationController
   before_action :correct_admin, only: %i[edit update]
 
   def new
+    @hidden_header = true
     @admin = Admin.new
   end
 

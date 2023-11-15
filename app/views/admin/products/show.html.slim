@@ -1,13 +1,16 @@
-.[style="display: flex; flex-direction: row;"]
+.d-flex.flex-row
   .container.px-4.px-lg-5.my-5.me-0
     .row
       .col-md-5.mb-4.mb-md-0
         div
-          = image_tag(@product.image.variant(:show), :class => "img-fluid w-100") if @product.image.attached?
+          - if @product.image.attached?
+            = image_tag(@product.image.variant(:show), :class => "img-fluid w-100")
+          - else
+            = image_tag("book_default.jpg", :class => "img-fluid w-100")
       .col-lg-6.col-md-7.offset-lg-1
         h1.font-weight-bold.font-size-40.mb-4
           = @product.name
-        p.price.py-4.text-danger[style="font-size: 26px;"]
+        p.py-4.text-danger.product-price.fw-bold
           = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
           '  ₫
         .content

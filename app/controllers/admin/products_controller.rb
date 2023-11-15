@@ -37,7 +37,7 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product.product_categories.destroy_all
-    cart_item = CartItem.find(@product.id)
+    cart_item = CartItem.find_by(product_id: @product.id)
     cart_item.destroy
     @product.destroy
     flash[:success] = 'Product deleted.'

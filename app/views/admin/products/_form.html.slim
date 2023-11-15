@@ -5,7 +5,12 @@
   = f.label :description, class: "form-label mt-2"
   = f.text_field :description, class: "form-control border border-secondary"
   = f.label :category, class: "form-label mt-2"
-  = f.collection_select(:category_ids, Category.all, :id, :name, multiple: true, :prompt => '-- Select a Category --', :class => "form-select")
+  = f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b|
+    .d-flex.flex-direction-row.align-items-center.checkbox
+      .col-1.d-flex.justify-content-center
+        = b.check_box
+      .col-11
+        = b.label
   = f.label :author, class: "form-label mt-2"
   = f.text_field :author, class: "form-control border border-secondary"
   = f.label :publisher, class: "form-label mt-2"

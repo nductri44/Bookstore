@@ -1,7 +1,3 @@
-/* @import "bootstrap-sprockets";
-@import "bootstrap";
-
-
 /** Header **/
 
 a {
@@ -28,6 +24,10 @@ a {
   height: 50px;
 }
 
+.light-gray {
+  color: #7a7a7a
+}
+
 .bi-cart3:after {
   content: attr(value);
   font-size: 12px;
@@ -41,29 +41,29 @@ a {
   opacity: 0.9;
 }
 
-/** Header End **/
-
-
-
-/** Error **/
-
-
-/* #error_explanation {
-  color: red;
-
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
+.cart-icon {
+  font-size: 28px;
 }
 
-.field_with_errors {
-  @extend .has-error;
+.header-name {
+  font-size: 17px;
+}
 
-  .form-control {
-    color: $state-danger-text;
-  }
-} */ */
+/** Header End **/
+
+/** Footer **/
+
+.text-footer {
+  padding: 30px;
+  font-size: 14px;
+}
+
+.footer-non-decoration {
+  text-decoration: none;
+}
+
+/** Footer End **/
+
 
 /** Input Hide Arrows **/
 
@@ -129,6 +129,16 @@ input[type=number] {
   box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
 }
 
+.error {
+  color: red;
+}
+
+input.error {
+  border-color: Red;
+  border-style: solid;
+  border-width: 1px
+}
+
 /** Errors End **/
 
 
@@ -149,6 +159,27 @@ input[type=number] {
 
 
 /** Show product **/
+
+.product-show-bg {
+  display: flex;
+  min-height: 520px;
+}
+
+.product-note {
+  font-size: 12px;
+}
+
+.product-price {
+  font-size: 28px;
+}
+
+.product-input {
+  width: 50px;
+}
+
+.product-stock {
+  font-size: 14px;
+}
 
 .font-weight-bold {
   font-weight: 700 !important;
@@ -195,6 +226,14 @@ p {
   background-image: linear-gradient(bottom, rgba(255, 239, 206, 0) 0%, rgba(255, 239, 206, 0.25) 100%);
 }
 
+.card-width {
+  width: 15rem;
+}
+
+.img-home-height {
+  height: 170px;
+}
+
 /** Home Page End **/
 
 /** Shopping Cart **/
@@ -209,8 +248,21 @@ p {
   }
 }
 
+.cart-title-2 {
+  padding-left: 12%;
+}
+
+.cart-title-3 {
+  padding-left: 7%;
+}
+
+.cart-title-4 {
+  padding-left: 5%;
+}
+
 .card-margin {
   margin-bottom: 100px;
+  border-radius: 15px;
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -271,9 +323,46 @@ div.rounded-side {
   font-size: 17px;
 }
 
+.img-cart-empty {
+  width: 450px;
+  height: 250px;
+}
+
+.cart-img-height {
+  height: 55px;
+}
+
+.cart-input {
+  text-align: center;
+  width: 35%;
+}
+
+.icon-end-size {
+  font-size: 1.5rem
+}
+
+.number-last-row {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.text-last-row {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.margin-last-row {
+  display: inline-block;
+  margin: 0;
+}
+
 /** Shopping Cart End **/
 
 /** Order Register **/
+
+.pl-0 {
+  padding-left: 0;
+}
 
 .form-order-button {
   width: 35%;
@@ -282,9 +371,36 @@ div.rounded-side {
   border-radius: 15px;
 }
 
+.order_left_bottom {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.img-order {
+  height: 60px;
+}
+
+.order_total_number {
+  font-size: 25px;
+  text-decoration: none;
+}
+
 /** Order Register End **/
 
-/** Order List **/
+
+/** User Order List **/
+
+.section-order {
+  background-color: #f8f6f0;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+.main-title-order {
+  margin-left: 9%;
+}
 
 .card-margin {
   margin-top: 10px;
@@ -294,6 +410,11 @@ div.rounded-side {
 .card-margin-order {
   margin-top: 10px;
   margin-bottom: 30px;
+  border-radius: 15px;
+}
+
+.img-order {
+  height: 65px;
 }
 
 .btn-width {
@@ -325,6 +446,15 @@ div.rounded-side {
 
 /** Form Login End **/
 
+/** Form Sign Up **/ 
+
+.signup-btn {
+  font-size: 16px;
+}
+
+
+/** Form Sign Up End **/
+
 /** Form Product **/
 
 .form-select {
@@ -349,8 +479,18 @@ select {
 
 /** Form Product End **/
 
+/** Admin Login **/
 
-/** Admin **/
+.section-admin {
+  background-color: #f8f6f0;
+  display: flex;
+  min-height: 600px;
+}
+
+/** Admin Login End **/
+
+
+/** Admin Sign Up **/
 
 .button {
   border: 2px solid black;
@@ -375,5 +515,84 @@ select {
   color: white;
 }
 
+/** Admin Sign Up End **/
 
-/** Admin End **/
+/** Admin Category **/
+
+.btn-category {
+  width: 135px;
+  float: right;
+}
+
+.btn-action {
+  width: 90px;
+}
+
+.img-category {
+  height: 130px;
+}
+
+/** Admin Category End **/
+
+/** Admin Product **/
+
+.checkbox_container input {
+  display: inline;
+}
+
+.btn-admin-product {
+  width: 130px;
+  float: right;
+}
+
+/** Admin Product End **/
+
+
+/** Kaminari **/
+
+.paginate-number {
+  text-decoration: none;
+  color: #dc3545;
+}
+
+/** Kaminari End **/
+
+
+/** Main things **/
+
+.main-bg-color {
+  background-color: #f8f6f0;
+}
+
+.non-decoration {
+  text-decoration: none;
+  color: black;
+}
+
+.section {
+  background-color: #f8f6f0;
+  display: flex;
+  min-height: 520px;
+}
+
+.pt-30 {
+  padding-top: 30px;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pl-2 {
+  padding-left: 2px;
+}
+
+.current {
+  background-color: #dc3545;
+  color: white;
+}
+
+.checkbox {
+  height: 2%;
+}
+/** Main things End **/

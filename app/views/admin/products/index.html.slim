@@ -1,13 +1,16 @@
-.[style="background-color: #f8f6f0; display: flex;"]
-  .container.pb-3[style="padding-top: 20px;"]
+.section
+  .container.pb-3.pt-20
     .row
       .col-6
         h3 Products
       .col-6
-        a href=new_admin_product_path class="button danger mb-4 text-center" style="width:130px; float: right;"
+        a href=new_admin_product_path class="button danger mb-4 text-center btn-admin-product"
           | New product
     .container
-      .row.d-flex.justify-content-center[style="overflow-x:auto;"]
+      .row.d-flex.justify-content-center.overflow-auto
+      - if @products.blank?
+        strong.text-center No item found
+      - else
         table.table.table-bordered.bg-white
           thead
             tr
@@ -35,13 +38,16 @@
                 td.text-center
                   = product.id
                 td.col-1
-                  = image_tag(product.image.variant(:show), :style => "height: 130px;") if product.image.attached?
+                  - if product.image.attached?
+                    = image_tag(product.image.variant(:show), :class => "img-category")
+                  - else
+                    = image_tag("book_default.jpg", :class => "img-category")
                 td
                   = product.name
                 td.text-center
                   - product.categories.each do |category|
-                    div[style="display: flex; flex-direction: column;"]
-                      = category.name
+                    div.d-flex.flex-column
+                    = category.name
                 td.text-center
                   = product.author
                 td.text-center.col-1
@@ -52,11 +58,11 @@
                 td.text-center
                   = product.stock          
                 td.col-2
-                  div[style="display: flex; flex-direction: column;"]
-                    div[style="display: flex; justify-content: center;"]
-                      = link_to "Show", admin_product_path(product), class: "button danger my-1", style: "width: 90px;"
-                    div[style="display: flex; justify-content: center;"]
-                      = link_to "Edit", edit_admin_product_path(product), class: "button danger my-1", style: "width: 90px;"
-                    div[style="display: flex; justify-content: center;"]
-                      = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-danger my-1", style: "width: 90px; font-weight: bold;"
+                  div.d-flex.flex-column
+                    div.d-flex.justify-content-center
+                      = link_to "Show", admin_product_path(product), class: "button danger btn-action my-1"
+                    div.d-flex.justify-content-center
+                      = link_to "Edit", edit_admin_product_path(product), class: "button danger btn-action my-1"
+                    div.d-flex.justify-content-center
+                      = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-danger btn-action my-1 fw-bold"
         = paginate @products

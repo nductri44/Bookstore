@@ -4,11 +4,18 @@ class User::OrdersController < ApplicationController
 
   def new
     @cart = current_user.cart
+    total_price
     check_stock
-    return unless @messages.present?
-
-    flash[:danger] = @messages
-    redirect_to(request.referrer)
+    if @messages.present?
+      flash[:danger] = @messages
+      redirect_to(request.referrer)
+    elsif @cart_items.empty?
+      @messages = ["You haven't bought anything"]
+      flash[:danger] = @messages
+      redirect_to(request.referrer)
+    else
+      nil
+    end
   end
 
   def show
@@ -78,5 +85,12 @@ class User::OrdersController < ApplicationController
   def send_order_email
     UserMailer.order_complete(@user, @order, @order_items).deliver_now
     AdminMailer.order_notification(Admin.first, @order, @order_items).deliver_now
+  end
+
+  def total_price
+    @total_price =
+      @cart.cart_items.reduce(0) do |sum, item|
+        sum + (item.product.price * item.quantity.to_i)
+      end
   end
 end

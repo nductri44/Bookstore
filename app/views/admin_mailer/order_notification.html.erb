@@ -29,7 +29,7 @@
       background-color: #f2f2f2;
     }
     .header {
-      background-color: purple;
+      background-color: #dc3545;
       color: white;
       text-align: center;
       padding: 10px;
@@ -37,8 +37,8 @@
     .fw-bold {
       font-weight: 700;
     }
-    .color-purple {
-      color: purple;
+    .color-red {
+      color: #dc3545;
     }
     .text-center {
       text-align: center;
@@ -55,7 +55,7 @@
     </div>
     <p>A new order has been received. Here are the details of the order:</p>
 
-    <p class="fw-bold color-purple">Order #<%= @order.id %> created on <%= @order.created_at.strftime("%d-%m-%Y") %> at <%= @order.created_at.strftime("%H:%M:%S") %>.</p>
+    <p class="fw-bold color-red">Order #<%= @order.id %> created on <%= @order.created_at.strftime("%d-%m-%Y") %> at <%= @order.created_at.strftime("%H:%M:%S") %>.</p>
 
    <table> 
       <tr>
@@ -71,12 +71,12 @@
         </tr>
       <% end %>
       <tr>
-        <td class="fw-bold color-purple"> Total payment: </td>
-        <td colspan="2" class="text-center fw-bold color-purple"> <%= number_to_currency(@order.total, unit: "", separator: "", delimiter: ".", precision: 0) %> ₫</td>
+        <td class="fw-bold color-red"> Total payment: </td>
+        <td colspan="2" class="text-center fw-bold color-red"> <%= number_to_currency(@order.total, unit: "", separator: "", delimiter: ".", precision: 0) %> ₫</td>
       </tr>
     </table>
 
-    <div class="fw-bold color-purple">
+    <div class="fw-bold color-red">
       <p>Billing information:</p>
     </div>
 

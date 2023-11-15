@@ -6,14 +6,14 @@ categories = Category.all
 10.times do |n|
   product = Product.create(
     name: Faker::Book.title,
-    description: Faker::Lorem.sentence(word_count: 5),
+    description: Faker::Lorem.sentence(word_count: 30),
     author: Faker::Book.author,
     publisher: Faker::Book.publisher,
-    price: Faker::Number.between(from: 100, to: 500),
+    price: Faker::Number.between(from: 90_000, to: 400_000),
     stock: Faker::Number.between(from: 1, to: 100)
   )
-  image = File.open(Rails.root.join("app/assets/images/book#{n + 1}.jpg"))
-  product.image.attach(io: image, filename: "book#{n + 1}.jpg")
+  image = File.open(Rails.root.join("app/assets/images/book_#{n + 1}.jpg"))
+  product.image.attach(io: image, filename: "book_#{n + 1}.jpg")
   product.categories << categories.sample(rand(1..5))
   product.save!
 end

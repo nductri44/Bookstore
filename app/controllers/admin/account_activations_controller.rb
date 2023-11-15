@@ -6,10 +6,10 @@ class Admin::AccountActivationsController < ApplicationController
       admin.update_attribute(:activated_at, Time.zone.now)
       admin_log_in(admin)
       flash[:success] = 'Account activated!'
-      redirect_to(root_url)
+      redirect_to(admin_url)
     else
       flash[:danger] = 'Invalid activation link'
-      redirect_to(root_url)
+      redirect_to(admin_url)
     end
   end
 end

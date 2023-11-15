@@ -11,7 +11,7 @@ class Admin::PasswordResetsController < ApplicationController
       @admin.create_reset_digest
       @admin.send_password_reset_email
       flash[:info] = 'Email sent with password reset instructions'
-      redirect_to(root_url)
+      redirect_to(admin_url)
     else
       flash.now[:danger] = 'Email address not found'
       render('new')
@@ -49,7 +49,7 @@ class Admin::PasswordResetsController < ApplicationController
   def valid_admin
     return if @admin && @admin.activated? && @admin.authenticated?(:reset, params[:id])
 
-    redirect_to(root_url)
+    redirect_to(admin_url)
   end
 
   # Checks expiration of reset token.
@@ -57,6 +57,6 @@ class Admin::PasswordResetsController < ApplicationController
     return unless @admin.password_reset_expired?
 
     flash[:danger] = 'Password reset has expired.'
-    redirect_to(new_password_reset_url)
+    redirect_to(new_admin_password_reset_url)
   end
 end

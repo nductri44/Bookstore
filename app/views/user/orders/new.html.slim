@@ -56,10 +56,9 @@
                         h4.d-flex.justify-content-between.fw-bold.mb-5.text-white
                           span Total Payment :
                           a.text-white.fw-bold.order_total_number
-                            = number_to_currency(@cart.total, unit: '', separator: '', delimiter: '.', precision: 0)
+                            = number_to_currency(@total_price, unit: '', separator: '', delimiter: '.', precision: 0)
                             '  ₫   
                         .text-center
-                          = hidden_field_tag :user_id, current_user.id
-                          = hidden_field_tag :total, @cart.total
+                          = hidden_field_tag :total, @total_price
                           = f.submit "Confirm", class: "order-confirm btn btn-light btn-block btn-lg text-danger font-weight-bold btn-width"
             

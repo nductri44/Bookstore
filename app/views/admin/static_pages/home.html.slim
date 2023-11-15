@@ -1,39 +1,38 @@
-body[style="background-color: #f8f6f0;"]
-  section[style="padding-top: 20px;"]
-    .container.pb-3
-      h3.mb-3 Orders
-      .container
-        .row.d-flex.justify-content-center
-          table.table.table-bordered.bg-white
-            thead
+.section.pt-20
+  .container.pb-3
+    h3.mb-3 Orders
+    .container
+      .row.d-flex.justify-content-center
+        table.table.table-bordered.bg-white
+          thead
+            tr
+              th[scope="col"]
+                | Order ID
+              th[scope="col"]
+                | Name
+              th[scope="col"]
+                | Purchased
+              th[scope="col"]
+                | Date
+              th[scope="col"]
+                | Total
+              th[scope="col"]
+                | Action
+          tbody
+            - @orders.each do |order|
               tr
-                th[scope="col"]
-                  | Order ID
-                th[scope="col"]
-                  | Name
-                th[scope="col"]
-                  | Purchased
-                th[scope="col"]
-                  | Date
-                th[scope="col"]
-                  | Total
-                th[scope="col"]
-                  | Action
-            tbody
-              - @orders.each do |order|
-                tr
-                  th[scope="row"]
-                    = order.id
-                  td
-                    = order.name
-                  td
-                    | #{order.order_items.count} 
-                    | items
-                  td
-                    = order.created_at.strftime("%d-%m-%Y")
-                  td
-                    = number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0) 
-                    |  ₫
-                  td
-                    = link_to "Details", admin_order_path(order)
-          = paginate @orders 
+                th[scope="row"]
+                  = order.id
+                td
+                  = order.name
+                td
+                  | #{order.order_items.count} 
+                  | items
+                td
+                  = order.created_at.strftime("%d-%m-%Y")
+                td
+                  = number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0) 
+                  |  ₫
+                td
+                  = link_to "Details", admin_order_path(order)
+        = paginate @orders 

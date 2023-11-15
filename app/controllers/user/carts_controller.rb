@@ -14,7 +14,12 @@ class User::CartsController < ApplicationController
       next if add[:quantity].to_i > add[:stock].to_i || add[:quantity].to_i == 0
 
       if @cart_item
-        @cart_item.update(quantity: @cart_item.quantity + add[:quantity].to_i)
+        new_quantity = @cart_item.quantity + add[:quantity].to_i
+        if new_quantity > add[:stock]
+          @cart_item.update(quantity: @cart_item.quantity)
+        else
+          @cart_item.update(quantity: new_quantity)
+        end
       else
         @cart_item = @cart.cart_items.build(product_id: add[:product_id], quantity: add[:quantity].to_i)
       end

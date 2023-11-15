@@ -1,45 +1,24 @@
 class User::CartsController < ApplicationController
   before_action :logged_in_user
   before_action :set_cart
-  before_action :set_cart_item, only: %i[edit destroy]
 
-  def show
+  def index
+    @flash_loop = true
     total_price
-  end
-
-  def create
-    @cart_item = @cart.cart_items.find_by(product_id: params[:product_id])
-    if params[:quantity].to_i > params[:stock].to_i
-      flash[:danger] = 'Not enough stock!'
-      redirect_to(request.referrer)
-    else
-      if @cart_item
-        @cart_item.update(quantity: @cart_item.quantity + params[:quantity].to_i)
-      else
-        @cart_item = @cart.cart_items.build(product_id: params[:product_id], quantity: params[:quantity].to_i)
-      end
-      if @cart_item.save
-        flash[:success] = 'Add to cart success!'
-        @cart.update(total: total_price)
-
-        redirect_to(request.referrer)
-      else
-        flash[:danger] = 'Cannot add to cart!'
-      end
-    end
   end
 
   def add_to_cart
     adds = params[:adds]
     adds.each do |add|
-      @cart_item = CartItem.find_by(product_id: add[:product_id])
-      next if add[:quantity].to_i > add[:stock].to_i
+      @cart_item = @cart.cart_items.find_by(product_id: add[:product_id])
+      next if add[:quantity].to_i > add[:stock].to_i || add[:quantity].to_i == 0
 
       if @cart_item
-        @cart_item.update(quantity: @cart_item.quantity + add[:quantity])
+        @cart_item.update(quantity: @cart_item.quantity + add[:quantity].to_i)
       else
-        @cart_item = @cart.cart_items.build(product_id: add[:product_id], quantity: add[:quantity])
+        @cart_item = @cart.cart_items.build(product_id: add[:product_id], quantity: add[:quantity].to_i)
       end
+
       @cart_item.save
       @cart.update(total: total_price)
     end
@@ -48,8 +27,9 @@ class User::CartsController < ApplicationController
   def update_cart
     updates = params[:updates]
     updates.each do |update|
-      @cart_item = CartItem.find_by(product_id: update[:product_id])
-      @cart_item.update(quantity: update[:quantity]) if @cart_item
+      @cart_item = @cart.cart_items.find_by(product_id: update[:product_id])
+      @cart_item.update(quantity: update[:quantity].to_i) if @cart_item
+      @cart_item.save
     end
 
     @cart = current_user.cart
@@ -57,10 +37,11 @@ class User::CartsController < ApplicationController
   end
 
   def destroy
+    @cart_item = @cart.cart_items.find_by(id: params[:id])
     @cart_item.destroy
     @cart.update(total: total_price)
     flash[:success] = 'Delete item success'
-    redirect_to(user_cart_url(@cart))
+    redirect_to(user_carts_url)
   end
 
   private
@@ -69,15 +50,10 @@ class User::CartsController < ApplicationController
     @cart = current_user.cart
   end
 
-  def set_cart_item
-    @cart_item = @cart.cart_items.find_by(id: params[:id])
-  end
-
   def total_price
-    price = []
-    @cart.cart_items.each do |item|
-      price << (item.product.price * item.quantity.to_i)
-    end
-    @total_price = price.sum
+    @total_price =
+      @cart.cart_items.reduce(0) do |sum, item|
+        sum + (item.product.price * item.quantity.to_i)
+      end
   end
 end

@@ -3,12 +3,10 @@ class ApplicationController < ActionController::Base
   include User::SessionsHelper
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
 
   def render_404
-    respond_to do |format|
-      format.html { render(template: 'errors/404', status: 404, layout: '/error') }
-      format.all { head(:not_found) }
-    end
+    render(template: 'errors/404', status: 404, layout: 'application', content_type: 'text/html')
   end
 
   private

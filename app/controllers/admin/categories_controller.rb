@@ -11,7 +11,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def show
-    @products = @category.products.page(params[:page]).per(5)
+    @products = @category.products.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def create
@@ -36,6 +36,14 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy
+    @category.products.each do |product|
+      next unless product.categories.count == 1
+
+      cart_item = CartItem.find(product.id)
+      cart_item.destroy
+      product.destroy
+    end
+    @category.product_categories.destroy_all
     @category.destroy
     flash[:success] = 'Category deleted.'
     redirect_to(admin_categories_url)
@@ -44,7 +52,7 @@ class Admin::CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :parent_id)
+    params.require(:category).permit(:name, :description)
   end
 
   def set_category

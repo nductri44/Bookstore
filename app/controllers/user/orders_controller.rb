@@ -1,11 +1,14 @@
 class User::OrdersController < ApplicationController
   before_action :logged_in_user
   before_action :set_user
-  before_action :set_cart_items, only: %i[create]
 
   def new
-    @flash_loop = true
     @cart = current_user.cart
+    check_stock
+    return unless @messages.present?
+
+    flash[:danger] = @messages
+    redirect_to(request.referrer)
   end
 
   def show
@@ -13,26 +16,21 @@ class User::OrdersController < ApplicationController
   end
 
   def create
-    check_stock
-    if @messages.empty?
-      @order = @user.orders.build(
-        total: params[:total],
-        name: params[:name],
-        email: params[:email],
-        address: params[:address],
-        phone: params[:phone]
-      )
-      if @order.save
-        create_order_items
-        send_order_email
-        flash[:success] = 'Order created success!'
-        redirect_to(home_url)
-      else
-        flash[:danger] = 'Cannot create order!'
-        redirect_to(request.referrer)
-      end
+    @order = @user.orders.build(
+      total: params[:total],
+      name: params[:name],
+      email: params[:email],
+      address: params[:address],
+      phone: params[:phone]
+    )
+    if @order.save
+      create_order_items
+      clear_cart_items
+      send_order_email
+      flash[:success] = 'Order created success!'
+      redirect_to(home_url)
     else
-      flash[:danger] = @messages
+      flash[:danger] = 'Cannot create order!'
       redirect_to(request.referrer)
     end
   end
@@ -43,28 +41,38 @@ class User::OrdersController < ApplicationController
     @user = current_user
   end
 
-  def set_cart_items
-    @cart_items = @user.cart.cart_items
+  def check_stock
+    @cart_items = current_user.cart.cart_items
+    @messages =
+      @cart_items.each_with_object([]) do |item, messages|
+        messages << "#{item.product.name}'s stock is not enough!" if item.quantity.to_i > item.product.stock.to_i
+      end
   end
 
   def create_order_items
+    @cart_items = current_user.cart.cart_items
     @cart_items.each do |item|
       @order_item = @order.order_items.build(
         product_id: item.product_id,
+        name: item.product.name,
         price: item.product.price,
         quantity: item.quantity
       )
-      @order_item.save!
+
+      product = item.product
+      if product.image.attached?
+        image_blob = product.image.blob
+        @order_item.image.attach(image_blob)
+      end
+
+      @order_item.save
     end
     @order_items = @order.order_items
   end
 
-  def check_stock
-    @messages = []
-    @cart_items.each do |item|
-      @messages << "#{item.product.name}'s stock is not enough!" if item.quantity.to_i > item.product.stock.to_i
-    end
-    @messages
+  def clear_cart_items
+    @cart_items = current_user.cart.cart_items
+    @cart_items.destroy_all
   end
 
   def send_order_email

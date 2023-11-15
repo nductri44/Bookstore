@@ -7,7 +7,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(4)
+    @products = Product.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(8).order(created_at: :desc)
     @search_text = params[:search]
   end
 
@@ -31,11 +31,14 @@ class Admin::ProductsController < ApplicationController
       flash[:success] = 'Product updated.'
       redirect_to(admin_products_url)
     else
-      render('form')
+      render('edit')
     end
   end
 
   def destroy
+    @product.product_categories.destroy_all
+    cart_item = CartItem.find(@product.id)
+    cart_item.destroy
     @product.destroy
     flash[:success] = 'Product deleted.'
     redirect_to(admin_products_url)
@@ -44,7 +47,16 @@ class Admin::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :category_ids, :author, :publisher, :price, :stock, :image)
+    params.require(:product).permit(
+      :name,
+      :description,
+      :author,
+      :publisher,
+      :price,
+      :stock,
+      :image,
+      category_ids: []
+    )
   end
 
   def set_product

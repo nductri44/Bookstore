@@ -1,14 +1,17 @@
-section[style="background-color: #f8f6f0; display: flex; min-height: 520px;"]
+.section
   .container.pt-5
     .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
       - @products.each do |product|
-        .card.border-0.rounded.shadow.mx-2.mb-5[style="width: 15rem;"]
+        .card.border-0.rounded.shadow.mx-2.mb-5.card-width
           a[href=user_product_path(product)]
-            = image_tag(product.image.variant(:show), :class => "card-img-top rounded-0 center-block", :style => "height: 170px;") if product.image.attached?
+            - if product.image.attached?
+              = image_tag(product.image.variant(:show), :class => "card-img-top rounded-0 center-block img-home-height")
+            - else
+              = image_tag("book_default.jpg", :class => "card-img-top rounded-0 center-block img-home-height")
           .card-body.mt-0.mb-0
             .row
               .col-12
-                a[href=user_product_path(product) style="text-decoration: none; color: black; "]
+                a.non-decoration[href=user_product_path(product)]
                   h5.card-title.fw-bold
                     = product.name
                 p.card-text.text-danger
@@ -21,4 +24,6 @@ section[style="background-color: #f8f6f0; display: flex; min-height: 520px;"]
                 = f.hidden_field :stock, value: product.stock, class: "stock"
                 = f.hidden_field :quantity, value: 1, class: "quantity"
                 = f.submit "Add to cart", class: "add-to-cart snipcart-add-item btn btn-main mb-0 font-weight-bold"   
+    - if @products.blank?
+      strong.text-center No item found
     = paginate @products

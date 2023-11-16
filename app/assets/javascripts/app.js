@@ -5,4 +5,5 @@
 //= require admin_list.js
 //= require carts_manager.js
 //= require orders_manager.js
+//= require user_products.js
 //= require common.js

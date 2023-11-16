@@ -4,4 +4,9 @@ class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
+  def search
+    @orders = Order.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(8)
+    @search_order = params[:search]
+  end
 end

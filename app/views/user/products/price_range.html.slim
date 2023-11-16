@@ -1,8 +1,33 @@
 .section.main-bg-color
   .container.pt-4
-    h3.px-5.pb-3 New Arrivals
-    .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
-      - @new_arrivals.first(8).each do |product|
+    button.btn.btn-light.btn-filter.fw-bold[type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: 2.3rem;"]
+      | Price Range
+    #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5.text-center.fw-bold
+              | PRICE RANGE
+            button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+          .modal-body
+            = form_tag(price_range_user_products_path, method: :get, id: "priceForm") do
+              .row.mb-3
+                .col-md-6
+                  .form-label
+                    = label_tag :minimum_price
+                  = number_field_tag :min_price, class: "form-control"
+                .col-md-6
+                  .form-label
+                    = label_tag :maximum_price
+                  = number_field_tag :max_price, class: "form-control"
+              .row
+                .col-md-12.text-center.my-2
+                  = button_tag("Submit", type: 'submit', class: 'btn btn-danger text-white fw-bold', name: nil)
+          .modal-footer
+            button.btn.btn-secondary.fw-bold[type="button" data-bs-dismiss="modal"]
+              | Close
+    .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center.mt-4
+      - @price_range.each do |product|
         .card.border-0.rounded.shadow-lg.mx-2.mb-5.card-width
           a[href=user_product_path(product)]
             - if product.image.attached?
@@ -32,5 +57,6 @@
               - else
                 = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
                   = f.submit "Add to cart", class: "btn btn-main mb-0 font-weight-bold"
-      - if @new_arrivals.blank?
-        h2.fw-bold.text-center Coming Soon
+      - if @price_range.blank?
+          h2.text-center.fw-bold No item found
+      = paginate @price_range

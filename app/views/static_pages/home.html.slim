@@ -24,12 +24,13 @@
           .row.align-items-center.text-center.g-0
             .col-12
               - if user_logged_in?
-                = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
-                  = f.hidden_field :product_id, value: product.id, class: "product-id"
-                  = f.hidden_field :stock, value: product.stock, class: "stock"
-                  = f.hidden_field :current_quantity, value: (current_user.cart.cart_items.find_by(product_id: product.id).present? ? current_user.cart.cart_items.find_by(product_id: product.id).quantity : 0), class: "current-quantity"
-                  = f.hidden_field :quantity, value: 1, class: "quantity"
-                  = f.submit "Add to cart", class: "add-to-cart btn btn-main mb-0 font-weight-bold"
+                .product-row
+                  = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
+                    = f.hidden_field :product_id, value: product.id, class: "product-id"
+                    = f.hidden_field :stock, value: product.stock, class: "stock"
+                    = f.hidden_field :current_quantity, value: (current_user.cart.cart_items.find_by(product_id: product.id).present? ? current_user.cart.cart_items.find_by(product_id: product.id).quantity : 0), class: "current-quantity"
+                    = f.hidden_field :quantity, value: 1, class: "quantity"
+                    = f.submit "Add to cart", class: "add-to-cart btn btn-main mb-0 font-weight-bold"
               - else
                 = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
                   = f.submit "Add to cart", class: "btn btn-main mb-0 font-weight-bold"
@@ -56,12 +57,13 @@
           .row.align-items-center.text-center.g-0
             .col-12
               - if user_logged_in?
-                = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
-                  = f.hidden_field :product_id, value: product.id, class: "product-id"
-                  = f.hidden_field :stock, value: product.stock, class: "stock"
-                  = f.hidden_field :current_quantity, value:(current_user.cart.cart_items.find_by(product_id: product.id).present? ? current_user.cart.cart_items.find_by(product_id: product.id).quantity : 0), class: "current-quantity"
-                  = f.hidden_field :quantity, value: 1, class: "quantity"
-                  = f.submit "Add to cart", class: "add-to-cart btn btn-main mb-0 font-weight-bold"
+                .product-row
+                  = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
+                    = f.hidden_field :product_id, value: product.id, class: "product-id"
+                    = f.hidden_field :stock, value: product.stock, class: "stock"
+                    = f.hidden_field :current_quantity, value:(current_user.cart.cart_items.find_by(product_id: product.id).present? ? current_user.cart.cart_items.find_by(product_id: product.id).quantity : 0), class: "current-quantity"
+                    = f.hidden_field :quantity, value: 1, class: "quantity"
+                    = f.submit "Add to cart", class: "add-to-cart btn btn-main mb-0 font-weight-bold"
               - else
                 = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
                   = f.submit "Add to cart", class: "btn btn-main mb-0 font-weight-bold"

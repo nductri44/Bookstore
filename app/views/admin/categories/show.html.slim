@@ -47,12 +47,15 @@
                 td.col-2
                   div.d-flex.flex-column
                     div.d-flex.justify-content-center
-                      = link_to "Show", admin_product_path(product), class: "button danger my-1 btn-category"
+                      = link_to admin_product_path(product), class: "button danger my-1 btn-cat-action"
+                        i.bi.bi-eye-fill.fs-25
                     div.d-flex.justify-content-center
-                      = link_to "Edit", edit_admin_product_path(product), class: "button danger my-1 btn-category"
+                      = link_to edit_admin_product_path(product), class: "button danger my-1 btn-cat-action"
+                        i.bi.bi-pencil-fill.fs-22
                     div.d-flex.justify-content-center
                       = form_tag(admin_product_path(product), method: :delete) do
-                        = submit_tag "Delete", class: "btn btn-danger btn-action my-1 fw-bold delete-product-btn"
+                        = button_tag(type: "submit", class: "btn btn-danger btn-action my-1 fw-bold delete-product-btn") do
+                          i.bi.bi-trash.fs-22
         = paginate @products 
 
 

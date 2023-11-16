@@ -552,6 +552,7 @@ select {
 
 .btn-action {
   width: 90px;
+  height: 2.4rem;
 }
 
 /** Admin Product End **/
@@ -611,14 +612,22 @@ select {
 
 .btn-filter {
   border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  color: black;
+  border-width: 2px;
+  border-color: #dc3545;
+  color: #dc3545;
 }
 
 .btn-filter:hover {
-  background-color: black;
+  background-color: #dc3545;
   color: white;
+}
+
+.fs-25 {
+  font-size: 25px;
+}
+
+.fs-22 {
+  font-size: 22px;
 }
 
 /** Main things End **/

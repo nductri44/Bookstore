@@ -25,6 +25,12 @@ class User::ProductsController < ApplicationController
     @high_to_low = Product.all.order(price: :desc).page(params[:page]).per(8)
   end
 
+  def price_range
+    min_price = params[:min_price].to_i
+    max_price = params[:max_price].to_i
+    @price_range = Product.where(price: min_price..max_price).page(params[:page]).per(8)
+  end
+
   def show
     @product = Product.find(params[:id])
   end

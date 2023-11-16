@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         get 'new_arrivals', to: 'products#new_arrivals'
         get 'low_to_high', to: 'products#low_to_high'
         get 'high_to_low', to: 'products#high_to_low'
+        get 'price_range', to: 'products#price_range'
       end
     end
     resources :carts do
@@ -44,7 +45,11 @@ Rails.application.routes.draw do
         get 'high_to_low', to: 'products#high_to_low'
       end
     end
-    resources :orders
+    resources :orders do
+      collection do
+        get 'search', to: 'orders#search'
+      end
+    end
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end

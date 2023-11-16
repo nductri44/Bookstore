@@ -119,13 +119,45 @@ $(document).ready(function() {
   }
 
 
+
   $('.add-to-cart').on('click', function(e) {
+    
     e.preventDefault();
-    var productId = $(this).parent().find('.product-id').val();
-    var stock = parseInt($(this).parent().find('.stock').val(), 10);
-    var current_quantity = parseInt($(this).parent().find('.current-quantity').val(), 10);
-    var quantity = parseInt($(this).parent().find('.quantity').val(), 10);
+    var $row = $(this).closest('.product-row');
+    var productId = $row.find('.product-id').val();
+    var stock = parseInt($row.find('.stock').val(), 10);
+    var current_quantity = parseInt($row.find('.current-quantity').val(), 10);
+    var quantity = parseInt($row.find('.quantity').val(), 10);
+    var totalQuantityInCart = current_quantity + quantity;
+    var $input = $row.find('.current-quantity');
     var adds = [];
+
+    console.log(productId);
+    console.log(stock);
+    console.log(current_quantity);
+    console.log(quantity);
+
+    if (totalQuantityInCart > stock) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "This product's stock is not enough!",
+      });
+    } else if (quantity === null || quantity === 0 || isNaN(quantity)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The quantity field cannot be blank or equal to 0!",
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Add to cart success!",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
 
     var cart = {
       adds: adds
@@ -136,7 +168,6 @@ $(document).ready(function() {
       stock: stock,
       quantity: quantity,
     }
-
     adds.push(add);
 
     $.ajax({
@@ -146,30 +177,10 @@ $(document).ready(function() {
       contentType: 'application/json',
     }).done(function(data) {
       $('.cart-count').attr('value', data.cart_count);
-      if ((stock - quantity < 0) || (stock - (current_quantity + quantity) < 0)) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "This product's stock is not enough!",
-        });
-      } else if (quantity === null || quantity === 0 || isNaN(quantity)) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "The quantity field cannot be blank or equal to 0!",
-        });
-      } else {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Add to cart success!",
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-      $('.current-quantity').attr('value', data.current_quantity);
+      $input.val(data.current_quantity);
     });
   });
+
 
 
 });

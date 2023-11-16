@@ -6,7 +6,7 @@
           - flash[:danger].each do |message|
             div.alert.alert-danger
               = message
-        .card.card-registration.card-registration-2.card-margin
+        .card.card-registration.card-registration-2.card-margin.shadow
           .card-body.p-0
             .row.g-0
               .col-lg-12
@@ -46,9 +46,9 @@
                         .col-md-1.col-lg-1.col-xl-1
                           a.non-decoration[href=user_product_path(item.product)]
                             - if item.product.image.attached?
-                              = image_tag(item.product.image.variant(:show), :class => "img-fluid rounded-2 cart-img-height")
+                              = image_tag(item.product.image.variant(:show), :class => "img-fluid rounded-2 img-cart")
                             - else
-                              = image_tag("book_default.jpg", :class => "img-fluid rounded-2 cart-img-height")
+                              = image_tag("book_default.jpg", :class => "img-fluid rounded-2 img-cart")
                         .col-md-4.col-lg-4.col-xl-4
                           a.non-decoration.mb-0.font-weight-600[href=user_product_path(item.product)]
                             = item.product.name

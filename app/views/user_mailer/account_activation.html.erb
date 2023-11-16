@@ -86,7 +86,7 @@
     <p>Please click the "Activate" below to activate your account first. </p>
 
     <div class="d-flex justify-content-center">
-      <%= link_to 'Activate', edit_user_account_activation_url(@user.activation_token, email: @user.email), class: "button text-center text-white " %>
+      <%= link_to 'Activate', edit_user_account_activation_url(@user.activation_token, email: @user.email), class: "button text-center text-white fw-bold" %>
     </div>
   </div>
 </body>

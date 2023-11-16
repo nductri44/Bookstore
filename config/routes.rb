@@ -11,7 +11,14 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
     resources :users
     resources :categories
-    resources :products
+    resources :products do
+      collection do
+        get 'best_sellers', to: 'products#best_sellers'
+        get 'new_arrivals', to: 'products#new_arrivals'
+        get 'low_to_high', to: 'products#low_to_high'
+        get 'high_to_low', to: 'products#high_to_low'
+      end
+    end
     resources :carts do
       collection do
         post 'add_to_cart', to: 'carts#add_to_cart'

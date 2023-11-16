@@ -22,18 +22,29 @@
         p.fw-bold.py-2.text-danger.product-price
           = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
           '  ₫
-        = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
-          = f.hidden_field :product_id, value: @product.id, class: "product-id"
-          = f.hidden_field :stock, value: @product.stock, class: "stock"
-          = f.hidden_field :current_quantity, value: (current_user.cart.cart_items.find_by(product_id: @product.id).present? ? current_user.cart.cart_items.find_by(product_id: @product.id).quantity : 0), class: "current-quantity"
-          .row.pb-4
-            .col-6.d-flex.flex-row
-              a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
-                i.bi.bi-dash-lg
-              = f.number_field :quantity, class: "quantity form-control form-control-sm text-center product-input", min: 1, max: 9999, value: 1, type: :number, :id => "quantity-range"
-              a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
-                i.bi.bi-plus-lg
-          = f.submit "Add to cart", class: "add-to-cart snipcart-add-item btn btn-product mb-3 font-weight-bold" 
+        - if user_logged_in?
+          = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
+            = f.hidden_field :product_id, value: @product.id, class: "product-id"
+            = f.hidden_field :stock, value: @product.stock, class: "stock"
+            = f.hidden_field :current_quantity, value: (current_user.cart.cart_items.find_by(product_id: @product.id).present? ? current_user.cart.cart_items.find_by(product_id: @product.id).quantity : 0), class: "current-quantity"
+            .row.pb-4
+              .col-6.d-flex.flex-row
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
+                  i.bi.bi-dash-lg
+                = f.number_field :quantity, class: "quantity form-control form-control-sm text-center product-input", min: 1, max: 9999, value: 1, type: :number, :id => "quantity-range"
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
+                  i.bi.bi-plus-lg
+            = f.submit "Add to cart", class: "add-to-cart snipcart-add-item btn btn-product mb-3 font-weight-bold" 
+        - else
+          = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
+            .row.pb-4
+              .col-6.d-flex.flex-row
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepDown()"]
+                  i.bi.bi-dash-lg
+                = f.number_field :quantity, class: "quantity form-control form-control-sm text-center product-input", min: 1, max: 9999, value: 1, type: :number, :id => "quantity-range"
+                a.btn.btn-link.px-2[onclick="this.parentNode.querySelector('input[type=number]').stepUp()"]
+                  i.bi.bi-plus-lg
+            = f.submit "Add to cart", class: "snipcart-add-item btn btn-product mb-3 font-weight-bold" 
         .content
           h6.text-justify
             = @product.description

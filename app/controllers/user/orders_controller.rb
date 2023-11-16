@@ -6,15 +6,14 @@ class User::OrdersController < ApplicationController
     @cart = current_user.cart
     total_price
     check_stock
+
     if @messages.present?
       flash[:danger] = @messages
       redirect_to(request.referrer)
     elsif @cart_items.empty?
-      @messages = ["You haven't bought anything"]
+      @messages = ["There's something wrong. The product's stock is not enough."]
       flash[:danger] = @messages
       redirect_to(request.referrer)
-    else
-      nil
     end
   end
 

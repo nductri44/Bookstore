@@ -15,7 +15,7 @@ class Admin::AdminsController < ApplicationController
     if @admin.save
       AdminMailer.account_activation(@admin).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
-      redirect_to(root_url)
+      redirect_to(admin_url)
     else
       render('new')
     end
@@ -35,7 +35,7 @@ class Admin::AdminsController < ApplicationController
   def destroy
     @admin.destroy
     flash[:success] = 'Admin deleted'
-    redirect_to(root_url)
+    redirect_to(admin_url)
   end
 
   private

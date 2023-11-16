@@ -150,15 +150,13 @@ $(document).ready(function() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Cannot add to cart!",
-          footer: "This product's stock is not enough."
+          text: "This product's stock is not enough!",
         });
-      } else if ((quantity == "") || (quantity == 0)) {
+      } else if (quantity === null || quantity === 0 || isNaN(quantity)) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Cannot add to cart!",
-          footer: "The quantity field cannot be blank or equal to 0."
+          text: "The quantity field cannot be blank or equal to 0!",
         });
       } else {
         Swal.fire({
@@ -173,24 +171,5 @@ $(document).ready(function() {
     });
   });
 
-
-  // $('.delete-button').on('click', function(e){
-  //   e.preventDefault();
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: 'This action cannot be undone!',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Yes, do it!',
-  //     cancelButtonText: 'No, cancel!',
-  //     reverseButtons: true 
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.fire('Action performed!', 'You clicked Yes!', 'success');
-  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
-  //       Swal.fire('Action cancelled', 'You clicked No!', 'error');
-  //     }
-  //   });
-  // });
 
 });

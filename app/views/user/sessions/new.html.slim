@@ -2,7 +2,7 @@
   .container
     .row.my-4
       .col 
-      .col-6.pt-4.rounded.form-background
+      .col-6.pt-4.rounded.form-background.border.shadow
         h2.text-center.fw-bold 
           | Login
         = form_with(url: user_login_path, scope: :session, local: true) do |f|

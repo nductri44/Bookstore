@@ -38,7 +38,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product.product_categories.destroy_all
     cart_item = CartItem.find_by(product_id: @product.id)
-    cart_item.destroy
+    cart_item.destroy unless cart_item.nil?
     @product.destroy
     flash[:success] = 'Product deleted.'
     redirect_to(admin_products_url)

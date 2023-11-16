@@ -1,7 +1,7 @@
 .section
   .container.
     .row.my-4.d-flex.justify-content-center
-      .col-6.pt-4.rounded.form-background
+      .col-6.pt-4.rounded.form-background.border.shadow
         h2.text-center.fw-bold 
           | Reset password
         = form_with(url: user_password_resets_path, scope: :password_reset, local: true) do |f|
@@ -9,5 +9,5 @@
           = f.email_field :email, class: 'form-control'
           .row.mt-3.text-center
             .col-12
-              = f.submit 'Submit', class: 'btn btn-danger'
+              = f.submit 'Submit', class: 'btn btn-danger fw-bold'
 

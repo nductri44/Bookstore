@@ -31,7 +31,7 @@ class Admin::CategoriesController < ApplicationController
       flash[:success] = 'Category updated.'
       redirect_to(admin_categories_url)
     else
-      render('form')
+      render('edit')
     end
   end
 
@@ -40,7 +40,7 @@ class Admin::CategoriesController < ApplicationController
       next unless product.categories.count == 1
 
       cart_item = CartItem.find_by(product_id: product.id)
-      cart_item.destroy
+      cart_item.destroy unless cart_item.nil?
       product.destroy
     end
     @category.product_categories.destroy_all

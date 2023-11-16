@@ -2,7 +2,12 @@ class StaticPagesController < ApplicationController
   before_action :check_admin
 
   def home
-    best_sellers
+    @best_sellers = Product
+                    .select('products.*, SUM(order_items.quantity) as total_quantity')
+                    .joins(:order_items)
+                    .group(:id)
+                    .order('total_quantity DESC')
+                    .limit(4)
     @new_arrivals = Product.order(created_at: :desc)
   end
 
@@ -16,14 +21,5 @@ class StaticPagesController < ApplicationController
     return unless admin_logged_in?
 
     render('errors/404')
-  end
-
-  def best_sellers
-    @best_sellers = Product
-                    .joins(:order_items)
-                    .group(:id)
-                    .select('products.*, SUM(order_items.quantity) as total_quantity')
-                    .order('total_quantity DESC')
-                    .limit(4)
   end
 end

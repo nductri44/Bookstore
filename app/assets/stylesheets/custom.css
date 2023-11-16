@@ -328,8 +328,9 @@ div.rounded-side {
   height: 250px;
 }
 
-.cart-img-height {
+.img-cart {
   height: 55px;
+  width: 55px;
 }
 
 .cart-input {
@@ -378,6 +379,7 @@ div.rounded-side {
 
 .img-order {
   height: 60px;
+  width: 60px;
 }
 
 .order_total_number {
@@ -391,7 +393,7 @@ div.rounded-side {
 /** User Order List **/
 
 .section-order {
-  background-color: #f8f6f0;
+  /* background-color: #f8f6f0; */
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -482,7 +484,7 @@ select {
 /** Admin Login **/
 
 .section-admin {
-  background-color: #f8f6f0;
+  /* background-color: #f8f6f0; */
   display: flex;
   min-height: 600px;
 }
@@ -530,6 +532,7 @@ select {
 
 .img-category {
   height: 130px;
+  width: 120px;
 }
 
 /** Admin Category End **/
@@ -561,7 +564,7 @@ select {
 /** Main things **/
 
 .main-bg-color {
-  background-color: #f8f6f0;
+  /* background-color: #f8f6f0; */
 }
 
 .non-decoration {
@@ -570,7 +573,7 @@ select {
 }
 
 .section {
-  background-color: #f8f6f0;
+  /* background-color: #f8f6f0; */
   display: flex;
   min-height: 520px;
 }
@@ -595,4 +598,21 @@ select {
 .checkbox {
   height: 2%;
 }
+
+.color-red {
+  color: #dc3545
+}
+
+.btn-filter {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  color: black;
+}
+
+.btn-filter:hover {
+  background-color: black;
+  color: white;
+}
+
 /** Main things End **/

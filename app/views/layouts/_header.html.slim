@@ -12,14 +12,16 @@
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
           = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+          = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+            i.bi.bi-search
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(user_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
             = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+            = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+              i.bi.bi-search
         ul.navbar-nav.ms-auto
           li.nav-item
             a.nav-link.mx-2.active.header-name[aria-current="page" href=home_path]
@@ -28,15 +30,26 @@
             a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              - Category.all.each do |category|
+                li
+                  a.dropdown-item.text-black[href=user_category_path(category)]
+                    = category.name   
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Product
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
                 a.dropdown-item.text-black[href=user_products_path]
                   | All Books
               li
                 hr.dropdown-divider
-              - Category.all.each do |category|
-                li
-                  a.dropdown-item.text-black[href=user_category_path(category)]
-                    = category.name   
+              li
+                a.dropdown-item.text-black[href=best_sellers_user_products_path]
+                  | Best Sellers 
+                  i.bi.bi-star-fill.color-red
+              li
+                a.dropdown-item.text-black[href=new_arrivals_user_products_path]
+                  | New Arrivals  
         ul.navbar-nav.ms-auto
           li.nav-item
             a.nav-link[href=user_carts_path]
@@ -71,14 +84,16 @@
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
           = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+          = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+              i.bi.bi-search
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(admin_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
             = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+            = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+              i.bi.bi-search
         ul.navbar-nav.ms-auto
           li.nav-item
             a.nav-link.mx-2.active.header-name[aria-current="page" href=admin_path]
@@ -117,14 +132,16 @@
           span.border-danger.input-group-text.bg-danger.text-white
             i.fa-solid.fa-magnifying-glass
           = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-          = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+          = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+            i.bi.bi-search
       #navbarNavDropdown.collapse.navbar-collapse
         .ms-auto.d-none.d-lg-block
           = form_tag(user_products_path, method: :get, class: 'input-group') do
             span.border-danger.input-group-text.bg-danger.text-white
               i.fa-solid.fa-magnifying-glass
             = text_field_tag :search, @search_text, class: "form-control border-danger light-gray"
-            = submit_tag "Search", class: 'btn btn-danger text-white', name: nil
+            = button_tag(type: 'submit', class: 'btn btn-danger text-white', name: nil) do
+              i.bi.bi-search
         ul.navbar-nav.ms-auto
           li.nav-item
             a.nav-link.mx-2.active.header-name[aria-current="page" href=home_path]
@@ -133,15 +150,26 @@
             a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               | Category
             ul.dropdown-menu[aria-labelledby="navbarDropdown"]
+              - Category.all.each do |category|
+                li
+                  a.dropdown-item.text-black[href=user_category_path(category)]
+                    = category.name   
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle.mx-2.active.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Product
+            ul.dropdown-menu[aria-labelledby="navbarDropdown"]
               li
                 a.dropdown-item.text-black[href=user_products_path]
                   | All Books
               li
                 hr.dropdown-divider
-              - Category.all.each do |category|
-                li
-                  a.dropdown-item.text-black[href=user_category_path(category)]
-                    = category.name   
+              li
+                a.dropdown-item.text-black[href=best_sellers_user_products_path]
+                  | Best Sellers 
+                  i.bi.bi-star-fill.color-red
+              li
+                a.dropdown-item.text-black[href=new_arrivals_user_products_path]
+                  | New Arrivals  
         ul.navbar-nav.ms-auto
           li.nav-item.dropdown
             a#navbarDropdown.nav-link.dropdown-toggle.mx-2.header-name[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]

@@ -1,7 +1,7 @@
 .section
   .container.
     .row.my-4.d-flex.justify-content-center
-      .col-6.pt-4.rounded.form-background
+      .col-6.pt-4.rounded.form-background.border.shadow
         h2.text-center.fw-bold 
           | Reset password
         = form_with(model: @admin, url: admin_password_reset_url(params[:id]), local: true) do |f|
@@ -13,6 +13,6 @@
           = f.password_field :password_confirmation, class: "form-control border border-secondary"
           .row.mt-3.text-center
             .col-12
-              = f.submit 'Submit', class: 'btn btn-danger'
+              = f.submit 'Submit', class: 'btn btn-danger fw-bold'
 
       

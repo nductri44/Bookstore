@@ -4,8 +4,22 @@
       .col-6
         h3 Products
       .col-6
-        a href=new_admin_product_path class="button danger mb-4 text-center btn-admin-product"
-          | New product
+        - if params[:search].blank?
+          .d-flex.justify-content-end
+            .dropdown
+              button.btn.btn-light.btn-filter[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
+                i.me-1.bi.bi-funnel-fill
+                i.bi.bi-chevron-down
+              ul.dropdown-menu.pe-0[aria-labelledby="dropdownMenuButton1"]
+                li
+                  a.dropdown-item[href=low_to_high_admin_products_path]
+                    | Price: Low-to-High &uarr;
+                li
+                  a.dropdown-item[href=high_to_low_admin_products_path]
+                    | Price: High-to-Low &darr;
+            .ms-3
+            a href=new_admin_product_path class="button danger mb-4 text-center btn-admin-product"
+              | New product
     .container
       .row.d-flex.justify-content-center.overflow-auto
       - if @products.blank?
@@ -64,5 +78,6 @@
                     div.d-flex.justify-content-center
                       = link_to "Edit", edit_admin_product_path(product), class: "button danger btn-action my-1"
                     div.d-flex.justify-content-center
-                      = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-danger btn-action my-1 fw-bold"
+                      = form_tag(admin_product_path(product), method: :delete) do
+                        = submit_tag "Delete", class: "btn btn-danger btn-action my-1 fw-bold delete-product-btn"
         = paginate @products

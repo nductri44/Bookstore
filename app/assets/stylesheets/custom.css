@@ -526,9 +526,11 @@ select {
   float: right;
 }
 
-.btn-action {
+.btn-cat-action {
   width: 90px;
+  height: 38px;
 }
+
 
 .img-category {
   height: 130px;
@@ -546,6 +548,10 @@ select {
 .btn-admin-product {
   width: 130px;
   float: right;
+}
+
+.btn-action {
+  width: 90px;
 }
 
 /** Admin Product End **/

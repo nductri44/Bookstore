@@ -30,9 +30,10 @@
                   = category.products.count
                 td
                   div.d-flex.flex-row.justify-content-center
-                    = link_to "Show", admin_category_path(category), class: "button danger btn-action mx-2"
-                    = link_to "Edit", edit_admin_category_path(category), class: "button danger btn-action mx-2"
-                    = link_to "Delete", admin_category_path(category), method: :delete, class: "delete-button btn btn-danger btn-action mx-2 fw-bold"
+                    = link_to "Show", admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                    = link_to "Edit", edit_admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                    = form_tag(admin_category_path(category), method: :delete) do
+                      = submit_tag "Delete", class: "btn btn-danger btn-action fw-bold delete-product-btn"
         = paginate @categories
 
 

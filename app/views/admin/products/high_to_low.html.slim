@@ -1,11 +1,29 @@
-.section.pt-20
-  .container.pb-3
+.section
+  .container.pb-3.pt-20
     .row
       .col-6
-        h3 
-          = @category.name
+        h3 Products
+      .col-6
+        .d-flex.justify-content-end
+          .dropdown
+            button.btn.btn-light.btn-filter[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              i.me-1.bi.bi-funnel-fill
+              i.bi.bi-chevron-down
+            ul.dropdown-menu.pe-0[aria-labelledby="dropdownMenuButton1"]
+              li
+                a.dropdown-item[href=low_to_high_admin_products_path]
+                  | Price: Low-to-High &uarr;
+              li
+                a.dropdown-item
+                  | Price: High-to-Low &darr;
+          .ms-3
+          a href=new_admin_product_path class="button danger mb-4 text-center btn-admin-product"
+            | New product
     .container
       .row.d-flex.justify-content-center.overflow-auto
+      - if @high_to_low.blank?
+        strong.text-center No item found
+      - else
         table.table.table-bordered.bg-white
           thead
             tr
@@ -18,13 +36,17 @@
               th.text-center
                 | Category
               th.text-center
+                | Author
+              th.text-center
+                | Publisher
+              th.text-center
                 | Price
               th.text-center
                 | Stock
               th.text-center
                 | Action
           tbody
-            - @products.each do |product|
+            - @high_to_low.each do |product|
               tr
                 td.text-center
                   = product.id
@@ -35,11 +57,15 @@
                     = image_tag("book_default.jpg", :class => "img-category")
                 td
                   = product.name
-                td.col-2.text-center
+                td.text-center
                   - product.categories.each do |category|
                     div.d-flex.flex-column
-                      = category.name
+                    = category.name
                 td.text-center
+                  = product.author
+                td.text-center.col-1
+                  = product.publisher
+                td.text-center.col-1
                   = number_to_currency(product.price, unit: "", separator: "", delimiter: ".", precision: 0) 
                   |  ₫
                 td.text-center
@@ -47,17 +73,10 @@
                 td.col-2
                   div.d-flex.flex-column
                     div.d-flex.justify-content-center
-                      = link_to "Show", admin_product_path(product), class: "button danger my-1 btn-category"
+                      = link_to "Show", admin_product_path(product), class: "button danger btn-action my-1"
                     div.d-flex.justify-content-center
-                      = link_to "Edit", edit_admin_product_path(product), class: "button danger my-1 btn-category"
+                      = link_to "Edit", edit_admin_product_path(product), class: "button danger btn-action my-1"
                     div.d-flex.justify-content-center
                       = form_tag(admin_product_path(product), method: :delete) do
                         = submit_tag "Delete", class: "btn btn-danger btn-action my-1 fw-bold delete-product-btn"
-        = paginate @products 
-
-
-
-
-
-
-
+        = paginate @high_to_low

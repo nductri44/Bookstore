@@ -11,6 +11,14 @@ class Admin::ProductsController < ApplicationController
     @search_text = params[:search]
   end
 
+  def low_to_high
+    @low_to_high = Product.all.order(price: :asc).page(params[:page]).per(8)
+  end
+
+  def high_to_low
+    @high_to_low = Product.all.order(price: :desc).page(params[:page]).per(8)
+  end
+
   def show; end
 
   def create

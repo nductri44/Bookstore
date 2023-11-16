@@ -38,7 +38,12 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
     resources :admins
     resources :categories
-    resources :products
+    resources :products do
+      collection do
+        get 'low_to_high', to: 'products#low_to_high'
+        get 'high_to_low', to: 'products#high_to_low'
+      end
+    end
     resources :orders
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]

@@ -9,7 +9,7 @@
     .container
       .row.d-flex.justify-content-center
         - if @orders.blank?
-          strong.text-center No orders found
+          h2.text-center.fw-bold No orders found
         - else
           table.table.table-bordered.bg-white
             thead

@@ -22,22 +22,33 @@ class User::OrdersController < ApplicationController
   end
 
   def create
-    @order = @user.orders.build(
-      total: params[:total],
-      name: params[:name],
-      email: params[:email],
-      address: params[:address],
-      phone: params[:phone]
-    )
-    if @order.save
-      create_order_items
-      clear_cart_items
-      send_order_email
-      flash[:success] = 'Order created success!'
-      redirect_to(home_url)
+    @cart = current_user.cart
+    check_stock
+    if @messages.present?
+      flash[:danger] = @messages
+      redirect_to(user_carts_url)
+    elsif @cart_items.empty?
+      @messages = ["There's something wrong. The product's stock is not enough."]
+      flash[:danger] = @messages
+      redirect_to(user_carts_url)
     else
-      flash[:danger] = 'Cannot create order!'
-      redirect_to(request.referrer)
+      @order = @user.orders.build(
+        total: params[:total],
+        name: params[:name],
+        email: params[:email],
+        address: params[:address],
+        phone: params[:phone]
+      )
+      if @order.save
+        create_order_items
+        clear_cart_items
+        send_order_email
+        flash[:success] = 'Order created success!'
+        redirect_to(home_url)
+      else
+        flash[:danger] = 'Cannot create order!'
+        redirect_to(request.referrer)
+      end
     end
   end
 

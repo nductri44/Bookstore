@@ -622,6 +622,10 @@ select {
   color: white;
 }
 
+.h-62p {
+  height: 62%;
+}
+
 .fs-25 {
   font-size: 25px;
 }

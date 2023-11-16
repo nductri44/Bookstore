@@ -7,7 +7,7 @@
         - if params[:search].blank?
           .d-flex.justify-content-end
             .dropdown
-              button.btn.btn-light.btn-filter[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              button.btn.btn-light.btn-filter.h-62p[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
                 i.me-1.bi.bi-funnel-fill
                 i.bi.bi-chevron-down
               ul.dropdown-menu.pe-0[aria-labelledby="dropdownMenuButton1"]
@@ -23,7 +23,7 @@
     .container
       .row.d-flex.justify-content-center.overflow-auto
       - if @products.blank?
-        strong.text-center No item found
+        h2.text-center.fw-bold No item found
       - else
         table.table.table-bordered.bg-white
           thead

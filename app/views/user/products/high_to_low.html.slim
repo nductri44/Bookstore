@@ -70,5 +70,5 @@
                 = form_with(url: add_to_cart_user_carts_url, local: true) do |f|
                   = f.submit "Add to cart", class: "snipcart-add-item btn btn-main mb-0 font-weight-bold"
     - if @high_to_low.blank?
-      strong.text-center No item found
+        h2.text-center.fw-bold No item found
     = paginate @high_to_low

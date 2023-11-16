@@ -12,7 +12,7 @@ class User::SessionsController < ApplicationController
         message = 'Account not activated.'
         message += ' Check your email for the activation link.'
         flash[:warning] = message
-        redirect_to(login_path)
+        redirect_to(user_login_path)
       end
     else
       flash.now[:danger] = 'Invalid email/password combination'

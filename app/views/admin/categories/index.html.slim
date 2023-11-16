@@ -7,35 +7,38 @@
         a href=new_admin_category_path class="button danger mb-4 text-center btn-category"
           | New category
     .container
-      .row.d-flex.justify-content-center.overflow-auto
-        table.table.table-bordered.bg-white
-          thead
-            tr
-              th.text-center.col-2
-                | ID
-              th.text-center.col-4
-                | Name
-              th.text-center.col-2
-                | Product
-              th.text-center
-                | Action
-          tbody
-            - @categories.each do |category|
+      - if @categories.blank?
+        h2.text-center.fw-bold No categories found
+      - else
+        .row.d-flex.justify-content-center.overflow-auto
+          table.table.table-bordered.bg-white
+            thead
               tr
-                td.text-center
-                  = category.id
-                td.text-center
-                  = category.name
-                td.text-center
-                  = category.products.count
-                td
-                  div.d-flex.flex-row.justify-content-center
-                    = link_to admin_category_path(category), class: "button danger btn-cat-action mx-2"
-                      i.bi.bi-eye-fill.fs-25
-                    = link_to edit_admin_category_path(category), class: "button danger btn-cat-action mx-2"
-                      i.bi.bi-pencil-fill.fs-22
-                    = form_tag(admin_category_path(category), method: :delete) do
-                      = button_tag(type: "submit", class: "btn btn-danger btn-action fw-bold delete-product-btn mx-2") do
-                        i.bi.bi-trash.fs-22                
-        = paginate @categories
+                th.text-center.col-2
+                  | ID
+                th.text-center.col-4
+                  | Name
+                th.text-center.col-2
+                  | Product
+                th.text-center
+                  | Action
+            tbody
+              - @categories.each do |category|
+                tr
+                  td.text-center
+                    = category.id
+                  td.text-center
+                    = category.name
+                  td.text-center
+                    = category.products.count
+                  td
+                    div.d-flex.flex-row.justify-content-center
+                      = link_to admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                        i.bi.bi-eye-fill.fs-25
+                      = link_to edit_admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                        i.bi.bi-pencil-fill.fs-22
+                      = form_tag(admin_category_path(category), method: :delete) do
+                        = button_tag(type: "submit", class: "btn btn-danger btn-action fw-bold delete-product-btn mx-2") do
+                          i.bi.bi-trash.fs-22                
+          = paginate @categories
 

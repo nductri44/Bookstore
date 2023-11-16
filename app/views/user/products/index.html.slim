@@ -41,7 +41,7 @@
                 | Price: High-to-Low &darr;
     .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
       - if @products.blank?
-        strong.text-center No item found
+        h2.text-center.fw-bold No item found
       - else
         - @products.each do |product|
           .card.border-0.rounded.shadow-lg.mx-2.mb-5.my-2.card-width

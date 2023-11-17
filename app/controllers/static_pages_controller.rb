@@ -11,10 +11,6 @@ class StaticPagesController < ApplicationController
     @new_arrivals = Product.order(created_at: :desc)
   end
 
-  def show; end
-
-  def help; end
-
   private
 
   def check_admin

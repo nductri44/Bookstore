@@ -2,7 +2,7 @@
   .container.pt-4
     - if params[:search].blank?
       .d-flex.justify-content-between
-        button.btn.btn-light.btn-filter.fw-bold[type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: 2.3rem;"]
+        button.btn.btn-light.btn-filter.fw-bold.btn-price-range[type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"]
           | Price Range
         #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
           .modal-dialog

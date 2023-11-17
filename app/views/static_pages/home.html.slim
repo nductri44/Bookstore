@@ -1,7 +1,7 @@
 .section.main-bg-color
   .container.pt-4
     .d-flex.justify-content-center
-      = image_tag("banners.jpg", :style => "width: 100%; margin-bottom: 20px; margin-top: 20px;")
+      = image_tag("banners.jpg", class: "home-banner")
     h3.pb-3.fw-bold.text-danger Best Sellers
     .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
       - if @best_sellers.blank?
@@ -9,7 +9,7 @@
       - else
         - @best_sellers.each do |product|
           .card.border-0.rounded.shadow-lg.mx-2.mb-5.card-width
-            .badge.bg-danger.text-white.position-absolute[style="top: 0.5rem; right: 0.5rem"]
+            .badge.bg-danger.text-white.position-absolute.cart-badge
               | Sold #{product.total_quantity}
             a[href=user_product_path(product)]
               - if product.image.attached?

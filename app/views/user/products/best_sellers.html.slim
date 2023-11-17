@@ -4,7 +4,7 @@
     .row.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row-cols-xl-4.justify-content-center
       - @best_sellers.each do |product|
         .card.border-0.rounded.shadow-lg.mx-2.mb-5.card-width
-          .badge.bg-danger.text-white.position-absolute[style="top: 0.5rem; right: 0.5rem"]
+          .badge.bg-danger.text-white.position-absolute.cart-badge
             | Sold #{product.total_quantity}
           a[href=user_product_path(product)]
             - if product.image.attached?

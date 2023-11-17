@@ -6,7 +6,7 @@
           .container
             h2.text-center.fw-bold.mt-5 No Orders Found
       - else
-        = form_tag(search_admin_orders_path, method: :get, class: 'input-group', style: "margin-left: 45rem") do
+        = form_tag(search_admin_orders_path, method: :get, class: 'input-group order-search-bar') do
           = text_field_tag :search, @search_order, class: "form-control border-dark light-gray", placeholder: "Enter the name here"
           = button_tag(type: 'submit', class: 'btn btn-dark text-white border-dark', name: nil) do
             i.bi.bi-search

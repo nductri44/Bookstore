@@ -211,6 +211,9 @@ p {
   line-height: 25px;
 }
 
+.btn-price-range {
+  height: 2.3rem;
+}
 
 /** Show Product End **/
 
@@ -230,8 +233,19 @@ p {
   width: 15rem;
 }
 
+.cart-badge {
+  top: 0.5rem;
+  right: 0.5rem
+}
+
 .img-home-height {
   height: 170px;
+}
+
+.home-banner {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 /** Home Page End **/
@@ -518,6 +532,15 @@ select {
 }
 
 /** Admin Sign Up End **/
+
+/** Admin Order **/
+
+.order-search-bar {
+  margin-left: 45rem
+}
+
+
+/** Admin Order End **/
 
 /** Admin Category **/
 

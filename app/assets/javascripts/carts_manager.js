@@ -177,7 +177,7 @@ $(document).ready(function() {
       contentType: 'application/json',
     }).done(function(data) {
       $('.cart-count').attr('value', data.cart_count);
-      $input.val(data.current_quantity);
+      $input.val(parseInt(data.current_quantity, 10) || 0);
     });
   });
 

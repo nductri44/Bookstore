@@ -12,6 +12,6 @@ class Product < ApplicationRecord
   validates :category_ids, presence: true
   validates :author, presence: true
   validates :publisher, presence: true
-  validates :price, presence: true, numericality: true
-  validates :stock, presence: true, numericality: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end

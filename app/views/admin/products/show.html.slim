@@ -1,30 +1,18 @@
-section.py-5
-  .container.px-4.px-lg-5.my-5
-    .row.gx-4.gx-lg-5.align-items-center
-      .col-md-6
-        / img.card-img-top.mb-5.mb-md-0
-        = image_tag(@product.image.variant(:home), :class => "card-img-top mb-5 mb-md-0") if @product.image.attached?
-      .col-md-6
-        h1.display-5.fw-bolder
+.section.d-flex.flex-row
+  .container.px-4.px-lg-5.my-5.me-0
+    .row
+      .col-md-5.mb-4.mb-md-0
+        div
+          - if @product.image.attached?
+            = image_tag(@product.image.variant(:show), :class => "img-fluid w-100")
+          - else
+            = image_tag("book_default.jpg", :class => "img-fluid w-100")
+      .col-lg-6.col-md-7.offset-lg-1
+        h1.font-weight-bold.font-size-40.mb-4
           = @product.name
-        .fs-5.mb-5
-          h3
-            = @product.price 
-            '  VND
-        p.lead
-          = @product.description
-        .d-flex
-          input#inputQuantity.form-control.text-center.me-3[type="num" value="1" style="max-width: 3rem"]
-          button.btn.btn-outline-dark.flex-shrink-0[type="button"]
-            i.bi-cart-fill.me-1
-            |  Add to cart 
-        h4
-          | Author: 
-          = @product.author
-        h4
-          | Publisher: 
-          = @product.publisher
-        = form_with(url: user_carts_url, local: true) do |f|
-          = hidden_field_tag :product_id, product.id
-          = hidden_field_tag :quantity, 1
-          = f.submit "Add to cart", class: "btn btn-dark"
+        p.py-4.text-danger.product-price.fw-bold
+          = number_to_currency(@product.price, unit: "", separator: "", delimiter: ".", precision: 0)
+          '  ₫
+        .content
+          p
+            = @product.description

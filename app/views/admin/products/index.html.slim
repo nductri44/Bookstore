@@ -1,49 +1,86 @@
-- provide :title, "All products"
-h2 Product
-
-a href=new_admin_product_path class="btn btn-primary active mb-4" role="button" aria-pressed="true"
-  | New product
-
-table.table.table-bordered
-  thead
-    tr
-      th[scope="col"]
-        | ID
-      th[scope="col"]
-        | Name
-      th[scope="col"]
-        | Category
-      th[scope="col"]
-        | Price
-      th[scope="col"]
-        | Stock
-      th[scope="col"]
-        | Image
-      th[scope="col"]
-        | Action
-  tbody
-    - @products.each do |product|
-      tr
-        th[scope="row"]
-          = product.id
-        td
-          = product.name
-        td
-          - product.categories.each do |category|
-            = category.name
-        td
-          = product.price
-        td
-          = product.stock
-        td
-          = image_tag(product.image.variant(:thumb)) if product.image.attached?
-        td
-          table
+.section
+  .container.pb-3.pt-20
+    .row
+      .col-6
+        h3 Products
+      .col-6
+        - if params[:search].blank?
+          .d-flex.justify-content-end
+            .dropdown
+              button.btn.btn-light.btn-filter.h-62p[type="button" data-bs-toggle="dropdown" aria-expanded="false"]
+                i.me-1.bi.bi-funnel-fill
+                i.bi.bi-chevron-down
+              ul.dropdown-menu.pe-0[aria-labelledby="dropdownMenuButton1"]
+                li
+                  a.dropdown-item[href=low_to_high_admin_products_path]
+                    | Price: Low-to-High &uarr;
+                li
+                  a.dropdown-item[href=high_to_low_admin_products_path]
+                    | Price: High-to-Low &darr;
+            .ms-3
+            a href=new_admin_product_path class="button danger mb-4 text-center btn-admin-product"
+              | New product
+    .container
+      .row.d-flex.justify-content-center.overflow-auto
+      - if @products.blank?
+        h2.text-center.fw-bold No item found
+      - else
+        table.table.table-bordered.bg-white
+          thead
             tr
-              td
-                = link_to "Information", admin_product_path(product), class: "btn btn-dark mx-2"
-              td
-                = link_to "Edit", edit_admin_product_path(product), class: "btn btn-dark mx-2"
-              td
-                = link_to "Delete", admin_product_path(product), method: :delete, class: "btn btn-dark"
-
+              th.text-center
+                | ID
+              th.text-center
+                | Image
+              th.text-center
+                | Name
+              th.text-center
+                | Category
+              th.text-center
+                | Author
+              th.text-center
+                | Publisher
+              th.text-center
+                | Price
+              th.text-center
+                | Stock
+              th.text-center
+                | Action
+          tbody
+            - @products.each do |product|
+              tr
+                td.text-center
+                  = product.id
+                td.col-1
+                  - if product.image.attached?
+                    = image_tag(product.image.variant(:show), :class => "img-category")
+                  - else
+                    = image_tag("book_default.jpg", :class => "img-category")
+                td
+                  = product.name
+                td.text-center
+                  - product.categories.each do |category|
+                    div.d-flex.flex-column
+                    = category.name
+                td.text-center
+                  = product.author
+                td.text-center.col-1
+                  = product.publisher
+                td.text-center.col-1
+                  = number_to_currency(product.price, unit: "", separator: "", delimiter: ".", precision: 0) 
+                  |  ₫
+                td.text-center
+                  = product.stock          
+                td.col-2
+                  div.d-flex.flex-column
+                    div.d-flex.justify-content-center
+                      = link_to admin_product_path(product), class: "button danger btn-action my-1"
+                        i.bi.bi-eye-fill.fs-25
+                    div.d-flex.justify-content-center
+                      = link_to edit_admin_product_path(product), class: "button danger btn-action my-1"
+                        i.bi.bi-pencil-fill.fs-22
+                    div.d-flex.justify-content-center
+                      = form_tag(admin_product_path(product), method: :delete) do
+                        = button_tag(type: "submit", class: "btn btn-danger btn-action my-1 fw-bold delete-product-btn") do
+                          i.bi.bi-trash.fs-22
+        = paginate @products

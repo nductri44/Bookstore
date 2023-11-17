@@ -17,7 +17,7 @@ class User::UsersController < ApplicationController
       @user.create_cart!
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
-      redirect_to(root_url)
+      redirect_to(home_url)
     else
       render('new')
     end
@@ -28,19 +28,17 @@ class User::UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'Profile updated'
-      redirect_to(user_user_url)
+      redirect_to(home_url)
     else
       render('edit')
     end
   end
 
-  def destroy
-    @user.destroy
-    flash[:success] = 'User deleted'
-    redirect_to(root_url)
-  end
-
   private
+
+  def check_admin
+    render('errors/404') if admin_logged_in?
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :address, :phone)

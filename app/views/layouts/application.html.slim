@@ -9,16 +9,18 @@ html
       = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
       = javascript_importmap_tags
       = javascript_include_tag 'app'
-      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'    
+      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
     title
       | StrandBooks
     link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"
-    
-body
-    = render 'layouts/header'
-    / .container
-    - flash.each do |message_type, message|
-      div class="alert alert-#{message_type}"
-        = message
+
+  body
+    - unless @hidden_header 
+      = render 'layouts/header'
+    - unless @flash_loop
+      - flash.each do |message_type, message|
+        div class="alert alert-#{message_type}"
+          = message
     = yield
     = render 'layouts/footer'

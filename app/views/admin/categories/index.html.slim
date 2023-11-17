@@ -1,36 +1,44 @@
-- provide :title, "All categories"
-h2 Category
-
-a href=new_admin_category_path class="btn btn-primary active mb-4" role="button" aria-pressed="true"
-  | New category
-
-table.table.table-bordered
-  thead
-    tr
-      th[scope="col"]
-        | ID
-      th[scope="col"]
-        | Name
-      th[scope="col"]
-        | Description
-      th[scope="col"]
-        | Action
-  tbody
-    - @categories.each do |category|
-      tr
-        th[scope="row"]
-          = category.id
-        td
-          = category.name
-        td
-          = category.description
-        td
-          table
-            tr
-              td
-                = link_to "List of Products", admin_category_path(category), class: "btn btn-dark"
-              td
-                = link_to "Edit", edit_admin_category_path(category), class: "btn btn-dark mx-2"
-              td
-                = link_to "Delete", admin_category_path(category), method: :delete, class: "btn btn-dark"
+.section
+  .container.pb-3.pt-30
+    .row
+      .col-6
+        h3 Categories
+      .col-6
+        a href=new_admin_category_path class="button danger mb-4 text-center btn-category"
+          | New category
+    .container
+      - if @categories.blank?
+        h2.text-center.fw-bold No categories found
+      - else
+        .row.d-flex.justify-content-center.overflow-auto
+          table.table.table-bordered.bg-white
+            thead
+              tr
+                th.text-center.col-2
+                  | ID
+                th.text-center.col-4
+                  | Name
+                th.text-center.col-2
+                  | Product
+                th.text-center
+                  | Action
+            tbody
+              - @categories.each do |category|
+                tr
+                  td.text-center
+                    = category.id
+                  td.text-center
+                    = category.name
+                  td.text-center
+                    = category.products.count
+                  td
+                    div.d-flex.flex-row.justify-content-center
+                      = link_to admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                        i.bi.bi-eye-fill.fs-25
+                      = link_to edit_admin_category_path(category), class: "button danger btn-cat-action mx-2"
+                        i.bi.bi-pencil-fill.fs-22
+                      = form_tag(admin_category_path(category), method: :delete) do
+                        = button_tag(type: "submit", class: "btn btn-danger btn-action fw-bold delete-product-btn mx-2") do
+                          i.bi.bi-trash.fs-22                
+          = paginate @categories
 

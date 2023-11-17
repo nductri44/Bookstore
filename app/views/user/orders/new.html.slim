@@ -1,0 +1,64 @@
+.section
+  .container.py-2.h-100
+    .row.d-flex.justify-content-center.py-3.h-100
+      .col-12
+        = form_with(url: user_orders_path, local: true, :id => "orderForm") do |f|
+          .card.card-registration.card-registration-2.card-margin.shadow
+            .card-body.p-0
+              .row.g-0
+                .col-lg-6
+                  .py-4.px-5
+                    .d-flex.justify-content-between.align-items-center.mb-0                  
+                      .row.mb-4.d-flex.justify-content-between.align-items-center
+                        h4.fw-bold.text-black Contact information
+                        .row.mb-4.d-flex.justify-content-between.align-items-center 
+                        = f.label :name, class: "form-label pl-0"
+                        = f.text_field :name, value: @user.name, class: "form-control border"
+                        = f.label :email, class: "form-label mt-2 pl-0"
+                        = f.email_field :email, value: @user.email, class: "form-control"
+                        = f.label :shipping_address, class: "form-label mt-2 pl-0"
+                        = f.text_field :address, value: @user.address, class: "form-control"
+                        = f.label :phone, class: "form-label mt-2 pl-0"
+                        = f.text_field :phone, value: @user.phone, class: "form-control"
+                    .pt-5
+                      h6
+                        a.text-body.text-muted.order_left_bottom[href=user_carts_path]
+                          i.bi.bi-arrow-left.me-2
+                          | Back to cart
+                .col-lg-6.bg-danger.rounded-side
+                  .py-4.px-5
+                    .d-flex.justify-content-between.align-items-center
+                      h4.fw-bold.mb-0.text-white
+                        | Your cart
+                      h6.mb-0.text-muted
+                        | 
+                    - @cart.cart_items.each do |item|
+                      hr.my-3
+                      .row.d-flex.justify-content-between.align-items-center
+                        .col-2
+                          - if item.product.image.attached?
+                            = image_tag(item.product.image.variant(:show), :class => "img-fluid rounded-2 img-order")
+                          - else
+                            = image_tag("book_default.jpg", :class => "img-fluid rounded-2 img-order")
+                        .col-4
+                          h6.text-white.mb-0.fw-bold
+                            = item.product.name
+                        .col-2
+                          h6.text-white.mb-0.float-end
+                            ' x
+                            = item.quantity
+                        .col-4
+                          h6#price.mb-0.text-white.font-weight-400.float-end
+                            = number_to_currency(item.product.price, unit: "", separator: "", delimiter: ".", precision: 0)
+                            '  ₫                  
+                    hr.my-3
+                      .pt-3
+                        h4.d-flex.justify-content-between.fw-bold.mb-5.text-white
+                          span Total Payment :
+                          a.text-white.fw-bold.order_total_number
+                            = number_to_currency(@total_price, unit: '', separator: '', delimiter: '.', precision: 0)
+                            '  ₫   
+                        .text-center
+                          = hidden_field_tag :total, @total_price
+                          = f.submit "Confirm", class: "order-confirm btn btn-light btn-block btn-lg text-danger font-weight-bold btn-width"
+            

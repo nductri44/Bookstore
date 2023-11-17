@@ -1,14 +1,10 @@
 = form_with(model: [:admin, @category], local: true) do |f|
   = render 'shared/error_messages', object: f.object
-  br
-  = f.label :name
-  br
-  = f.text_field :name, class: 'form-control'
+  = f.label :name, class: "form-label"
+  = f.text_field :name, class: "form-control border border-secondary"
+  = f.label :description, class: "form-label mt-2"
+  = f.text_field :description, class: "form-control border border-secondary"
+  .row.mt-3.text-center
+    .col-12
+      = f.submit yield(:button_text), class: "btn btn-danger fw-bold signup-button"
 
-  = f.label :description
-  br
-  = f.text_field :description, class: 'form-control'
-
-  = f.submit yield(:button_text), class: 'btn btn-primary'
-  
-    

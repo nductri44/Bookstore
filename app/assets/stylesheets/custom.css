@@ -1,8 +1,8 @@
 /** Header **/
 
 a {
-font-size:14px;
-font-weight:700
+  font-size: 14px;
+  font-weight: 700
 }
 
 .superNav {
@@ -20,16 +20,173 @@ font-weight:700
   }
 }
 
+.input-custom {
+  height: 50px;
+}
+
+.light-gray {
+  color: #7a7a7a
+}
+
+.bi-cart3:after {
+  content: attr(value);
+  font-size: 12px;
+  color: #fff;
+  background: #dc3545;
+  border-radius: 50%;
+  padding: 0 5px;
+  position: relative;
+  left: -8px;
+  top: -10px;
+  opacity: 0.9;
+}
+
+.cart-icon {
+  font-size: 28px;
+}
+
+.header-name {
+  font-size: 17px;
+}
+
 /** Header End **/
+
+/** Footer **/
+
+.text-footer {
+  padding: 30px;
+  font-size: 14px;
+}
+
+.footer-non-decoration {
+  text-decoration: none;
+}
+
+/** Footer End **/
+
+
+/** Input Hide Arrows **/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/** Input Hide Arrows End **/
+
+/** Errors **/
+
+.rails-default-error-page {
+  background-color: #EFEFEF;
+  color: #2E2F30;
+  text-align: center;
+  font-family: arial, sans-serif;
+  margin: 0;
+}
+
+.rails-default-error-page div.dialog {
+  width: 95%;
+  max-width: 33em;
+  margin: 4em auto 0;
+}
+
+.rails-default-error-page div.dialog>div {
+  border: 1px solid #CCC;
+  border-right-color: #999;
+  border-left-color: #999;
+  border-bottom-color: #BBB;
+  border-top: #B00100 solid 4px;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  background-color: white;
+  padding: 7px 12% 0;
+  box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+}
+
+.rails-default-error-page h1 {
+  font-size: 100%;
+  color: #730E15;
+  line-height: 1.5em;
+}
+
+.rails-default-error-page div.dialog>p {
+  margin: 0 0 1em;
+  padding: 1em;
+  background-color: #F7F7F7;
+  border: 1px solid #CCC;
+  border-right-color: #999;
+  border-left-color: #999;
+  border-bottom-color: #999;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-color: #DADADA;
+  color: #666;
+  box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+}
+
+.error {
+  color: red;
+}
+
+input.error {
+  border-color: Red;
+  border-style: solid;
+  border-width: 1px
+}
+
+/** Errors End **/
+
+
+/** Sign Up Form **/
+
+.form-container div {
+  margin: 10px auto;
+}
+
+.signup-button {
+  width: 150px;
+  height: 45px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+/** Sign Up Form End **/
+
 
 /** Show product **/
 
+.product-show-bg {
+  display: flex;
+  min-height: 520px;
+}
+
+.product-note {
+  font-size: 12px;
+}
+
+.product-price {
+  font-size: 28px;
+}
+
+.product-input {
+  width: 50px;
+}
+
+.product-stock {
+  font-size: 14px;
+}
+
 .font-weight-bold {
-  font-weight: 700!important;
+  font-weight: 700 !important;
 }
 
 .font-size-40 {
-  font-size: 40px;
+  font-size: 20px;
   line-height: 1.2;
 }
 
@@ -54,6 +211,9 @@ p {
   line-height: 25px;
 }
 
+.btn-price-range {
+  height: 2.3rem;
+}
 
 /** Show Product End **/
 
@@ -69,6 +229,25 @@ p {
   background-image: linear-gradient(bottom, rgba(255, 239, 206, 0) 0%, rgba(255, 239, 206, 0.25) 100%);
 }
 
+.card-width {
+  width: 15rem;
+}
+
+.cart-badge {
+  top: 0.5rem;
+  right: 0.5rem
+}
+
+.img-home-height {
+  height: 170px;
+}
+
+.home-banner {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
 /** Home Page End **/
 
 /** Shopping Cart **/
@@ -77,10 +256,27 @@ p {
   .h-custom {
     height: 100vh !important;
   }
+
+  .h-custom-order {
+    height: 65vh !important;
+  }
+}
+
+.cart-title-2 {
+  padding-left: 12%;
+}
+
+.cart-title-3 {
+  padding-left: 7%;
+}
+
+.cart-title-4 {
+  padding-left: 5%;
 }
 
 .card-margin {
   margin-bottom: 100px;
+  border-radius: 15px;
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -118,7 +314,7 @@ div.rounded-side {
 
 .font-weight-600 {
   font-size: 18px;
-  font-weight: 600!important;
+  font-weight: 600 !important;
 }
 
 .font-weight-400 {
@@ -126,6 +322,339 @@ div.rounded-side {
   font-weight: 400 !important;
 }
 
-.white {
-  background-color: #ffffff;
+.btn-cart-empty {
+  width: 150px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 17px;
 }
+
+.btn-cart-checkout {
+  float: right;
+  width: 120px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 17px;
+}
+
+.img-cart-empty {
+  width: 450px;
+  height: 250px;
+}
+
+.img-cart {
+  height: 55px;
+  width: 55px;
+}
+
+.cart-input {
+  text-align: center;
+  width: 35%;
+}
+
+.icon-end-size {
+  font-size: 1.5rem
+}
+
+.number-last-row {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.text-last-row {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.margin-last-row {
+  display: inline-block;
+  margin: 0;
+}
+
+/** Shopping Cart End **/
+
+/** Order Register **/
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.form-order-button {
+  width: 35%;
+  height: 45px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.order_left_bottom {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.img-order {
+  height: 60px;
+  width: 60px;
+}
+
+.order_total_number {
+  font-size: 25px;
+  text-decoration: none;
+}
+
+/** Order Register End **/
+
+
+/** User Order List **/
+
+.section-order {
+  /* background-color: #f8f6f0; */
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+.main-title-order {
+  margin-left: 9%;
+}
+
+.card-margin {
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
+
+.card-margin-order {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+}
+
+.img-order {
+  height: 65px;
+}
+
+.btn-width {
+  width: 170px;
+}
+
+/** Order List End **/
+
+/** Form Login **/
+
+.form-background {
+  background-color: #ffffff;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.form-checkbox {
+  margin-right: 20px;
+  width: 17px;
+  height: 17px;
+}
+
+.form-button {
+  width: 25%;
+  height: 45px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+/** Form Login End **/
+
+/** Form Sign Up **/ 
+
+.signup-btn {
+  font-size: 16px;
+}
+
+
+/** Form Sign Up End **/
+
+/** Form Product **/
+
+.form-select {
+  width: 100%;
+  height: 50px;
+}
+
+select {
+  appearance: none;
+  /* safari */
+  -webkit-appearance: none;
+  /* other styles for aesthetics */
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.25em 6em 0.25em 1em;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  color: #000;
+  cursor: pointer;
+}
+
+/** Form Product End **/
+
+/** Admin Login **/
+
+.section-admin {
+  /* background-color: #f8f6f0; */
+  display: flex;
+  min-height: 600px;
+}
+
+/** Admin Login End **/
+
+
+/** Admin Sign Up **/
+
+.button {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 6px ;
+  font-size: 16px;
+  font-weight: 200px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+/** Admin Sign Up End **/
+
+/** Admin Order **/
+
+.order-search-bar {
+  margin-left: 45rem
+}
+
+
+/** Admin Order End **/
+
+/** Admin Category **/
+
+.btn-category {
+  width: 135px;
+  float: right;
+}
+
+.btn-cat-action {
+  width: 90px;
+  height: 38px;
+}
+
+
+.img-category {
+  height: 130px;
+  width: 120px;
+}
+
+/** Admin Category End **/
+
+/** Admin Product **/
+
+.checkbox_container input {
+  display: inline;
+}
+
+.btn-admin-product {
+  width: 130px;
+  float: right;
+}
+
+.btn-action {
+  width: 90px;
+  height: 2.4rem;
+}
+
+/** Admin Product End **/
+
+
+/** Kaminari **/
+
+.paginate-number {
+  text-decoration: none;
+  color: #dc3545;
+}
+
+/** Kaminari End **/
+
+
+/** Main things **/
+
+.main-bg-color {
+  /* background-color: #f8f6f0; */
+}
+
+.non-decoration {
+  text-decoration: none;
+  color: black;
+}
+
+.section {
+  /* background-color: #f8f6f0; */
+  display: flex;
+  min-height: 520px;
+}
+
+.pt-30 {
+  padding-top: 30px;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pl-2 {
+  padding-left: 2px;
+}
+
+.current {
+  background-color: #dc3545;
+  color: white;
+}
+
+.checkbox {
+  height: 2%;
+}
+
+.color-red {
+  color: #dc3545
+}
+
+.btn-filter {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-filter:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.h-62p {
+  height: 62%;
+}
+
+.fs-25 {
+  font-size: 25px;
+}
+
+.fs-22 {
+  font-size: 22px;
+}
+
+/** Main things End **/

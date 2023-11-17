@@ -1,4 +1,0 @@
-= form_for(@cart_item, url: user_cart_url(@cart_item), method: :patch) do |f|
-  = f.label :quantity
-  = f.text_field :quantity, class: "form-control"
-  = f.submit yield(:button_text), class: 'btn btn-primary'

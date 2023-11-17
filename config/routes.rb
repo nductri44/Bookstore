@@ -10,27 +10,55 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :users
-    resources :carts
-    resources :carts do
-      member do
-        get 'edit'
+    resources :categories
+    resources :products do
+      collection do
+        get 'best_sellers', to: 'products#best_sellers'
+        get 'new_arrivals', to: 'products#new_arrivals'
+        get 'low_to_high', to: 'products#low_to_high'
+        get 'high_to_low', to: 'products#high_to_low'
+        get 'price_range', to: 'products#price_range'
       end
     end
+    resources :carts do
+      collection do
+        post 'add_to_cart', to: 'carts#add_to_cart'
+        patch 'update_cart', to: 'carts#update_cart'
+      end
+    end
+    resources :orders
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end
 
   namespace :admin do
+    get '/', to: 'static_pages#home'
     get 'signup', to: 'admins#new'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :admins
     resources :categories
-    resources :products
+    resources :products do
+      collection do
+        get 'low_to_high', to: 'products#low_to_high'
+        get 'high_to_low', to: 'products#high_to_low'
+      end
+    end
+    resources :orders do
+      collection do
+        get 'search', to: 'orders#search'
+      end
+    end
     resources :account_activations, only: :edit
     resources :password_resets, only: %i[new create edit update]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  get '*all',
+      to: redirect { |_, req| "/?404=#{req.path}" },
+      constraints: lambda { |req|
+                     req.path.exclude?('rails/active_storage')
+                   }
 end

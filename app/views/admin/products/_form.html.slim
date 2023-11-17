@@ -1,38 +1,27 @@
 = form_with(model: [:admin, @product], local: true) do |f|
   = render 'shared/error_messages', object: f.object
-  br
-  = f.label :name
-  br
-  = f.text_field :name, class: 'form-control'
+  = f.label :name, class: "form-label"
+  = f.text_field :name, class: "form-control border border-secondary"
+  = f.label :description, class: "form-label mt-2"
+  = f.text_field :description, class: "form-control border border-secondary"
+  = f.label :category, class: "form-label mt-2"
+  = f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b|
+    .d-flex.flex-direction-row.align-items-center.checkbox
+      .col-1.d-flex.justify-content-center
+        = b.check_box
+      .col-11
+        = b.label
+  = f.label :author, class: "form-label mt-2"
+  = f.text_field :author, class: "form-control border border-secondary"
+  = f.label :publisher, class: "form-label mt-2"
+  = f.text_field :publisher, class: "form-control border border-secondary"
+  = f.label :price, class: "form-label mt-2"
+  = f.text_field :price, class: "form-control border border-secondary"
+  = f.label :stock, class: "form-label mt-2"
+  = f.text_field :stock, class: "form-control border border-secondary"
+  = f.label :image, class: "form-label mt-2"
+  = f.file_field :image, accept: "image/jpeg,image/gif,image/png", class: "form-control border border-secondary"
+  .row.mt-3.text-center
+    .col-12
+      = f.submit yield(:button_text), class: "btn btn-danger fw-bold signup-button"
 
-  = f.label :description
-  br
-  = f.text_field :description, class: 'form-control'
-
-  = f.label :category
-  br
-  = f.collection_select(:category_ids, Category.all, :id, :name, multiple: true, :prompt => '-- Select a Category --')
-  
-  = f.label :author
-  br
-  = f.text_field :author, class: 'form-control'
-
-  = f.label :publisher
-  br
-  = f.text_field :publisher, class: 'form-control'
-
-  = f.label :price
-  br
-  = f.number_field :price, class: 'form-control'
-
-  = f.label :stock
-  br
-  = f.number_field :stock, class: 'form-control'
-
-  div.image.pt-4
-  = f.label :image
-  = f.file_field :image, accept: "image/jpeg,image/gif,image/png"
-
-  br
-  = f.submit yield(:button_text), class: 'btn btn-primary'
-  

@@ -1,0 +1,18 @@
+== paginator.render do  
+  nav
+    ul.pagination.d-flex.justify-content-center.flex-wrap.pagination-rounded-flat.pagination-success
+      li.page-item
+        == first_page_tag unless current_page.first?
+      li.page-item
+        == prev_page_tag unless current_page.first?
+      - each_page do |page|
+        - if page.display_tag?
+          li.page-item
+            == page_tag page
+        - elsif !page.was_truncated?
+          li.page-item
+            == gap_tag
+      li.page-item
+        == next_page_tag unless current_page.last?
+      li.page-item
+        == last_page_tag unless current_page.last?

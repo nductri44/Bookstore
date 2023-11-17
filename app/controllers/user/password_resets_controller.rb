@@ -11,7 +11,7 @@ class User::PasswordResetsController < ApplicationController
       @user.create_reset_digest
       @user.send_password_reset_email
       flash[:info] = 'Email sent with password reset instructions'
-      redirect_to(root_url)
+      redirect_to(home_url)
     else
       flash.now[:danger] = 'Email address not found'
       render('new')
@@ -27,7 +27,7 @@ class User::PasswordResetsController < ApplicationController
     elsif @user.update(user_params) # Case (4)
       user_log_in(@user)
       flash[:success] = 'Password has been reset.'
-      redirect_to(root_url)
+      redirect_to(home_url)
     else
       render('edit') # Case (2)
     end
@@ -49,7 +49,7 @@ class User::PasswordResetsController < ApplicationController
   def valid_user
     return if @user && @user.activated? && @user.authenticated?(:reset, params[:id])
 
-    redirect_to(root_url)
+    redirect_to(home_url)
   end
 
   # Checks expiration of reset token.
@@ -57,6 +57,6 @@ class User::PasswordResetsController < ApplicationController
     return unless @user.password_reset_expired?
 
     flash[:danger] = 'Password reset has expired.'
-    redirect_to(new_password_reset_url)
+    redirect_to(new_user_password_reset_url)
   end
 end

@@ -1,0 +1,51 @@
+.section.pt-20
+  .container.pb-3
+    .d-flex.justify-content-between
+      h3.mb-3 Orders
+      = form_tag(search_admin_orders_path, method: :get, class: 'input-group order-search-bar') do
+        = text_field_tag :search, @search_order, class: "form-control border-dark light-gray", placeholder: "Enter the name here"
+        = button_tag(type: 'submit', class: 'btn btn-dark text-white border-dark', name: nil) do
+          i.bi.bi-search
+    .container
+      .row.d-flex.justify-content-center
+        - if @orders.blank?
+          h2.text-center.fw-bold No orders found
+        - else
+          table.table.table-bordered.bg-white
+            thead
+              tr
+                th.text-center[scope="col"]
+                  | Order ID
+                th.text-center[scope="col"]
+                  | Name
+                th.text-center[scope="col"]
+                  | Email
+                th.text-center[scope="col"]
+                  | Purchased
+                th.text-center[scope="col"]
+                  | Date
+                th.text-center[scope="col"]
+                  | Total
+                th.text-center[scope="col"]
+                  | Action
+            tbody
+              - @orders.each do |order|
+                tr
+                  th.text-center[scope="row"]
+                    = order.id
+                  td.text-center
+                    = order.name
+                  td.text-center
+                    = order.email
+                  td.text-center
+                    | #{order.order_items.count} 
+                    | items
+                  td.text-center
+                    = order.created_at.strftime("%d-%m-%Y")
+                  td.text-center
+                    = number_to_currency(order.total, unit: "", separator: "", delimiter: ".", precision: 0) 
+                    |  ₫
+                  td.d-flex.justify-content-center
+                    = link_to admin_order_path(order), class: "button danger"
+                      i.bi.bi-eye-fill.fs-25
+          = paginate @orders 

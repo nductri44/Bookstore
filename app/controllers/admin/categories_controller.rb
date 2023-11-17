@@ -7,15 +7,11 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    @categories = Category.all.page(params[:page]).per(5)
   end
 
   def show
-    @products = Category.products_in_category(@category.name)
-
-    return unless @products.nil?
-
-    flash[:danger] = 'Products not found.'
+    @products = @category.products.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def create
@@ -35,11 +31,19 @@ class Admin::CategoriesController < ApplicationController
       flash[:success] = 'Category updated.'
       redirect_to(admin_categories_url)
     else
-      render('form')
+      render('edit')
     end
   end
 
   def destroy
+    @category.products.each do |product|
+      next unless product.categories.count == 1
+
+      cart_item = CartItem.find_by(product_id: product.id)
+      cart_item.destroy unless cart_item.nil?
+      product.destroy
+    end
+    @category.product_categories.destroy_all
     @category.destroy
     flash[:success] = 'Category deleted.'
     redirect_to(admin_categories_url)
@@ -48,7 +52,7 @@ class Admin::CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :parent_id)
+    params.require(:category).permit(:name, :description)
   end
 
   def set_category

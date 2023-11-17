@@ -9,7 +9,7 @@ class User::AccountActivationsController < ApplicationController
       redirect_to(home_url)
     else
       flash[:danger] = 'Invalid activation link'
-      redirect_to(root_url)
+      redirect_to(home_url)
     end
   end
 end

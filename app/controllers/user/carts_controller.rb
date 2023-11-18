@@ -10,22 +10,7 @@ class User::CartsController < ApplicationController
   def add_to_cart
     adds = params[:adds]
     adds.each do |add|
-      @cart_item = @cart.cart_items.find_by(product_id: add[:product_id])
-      next if add[:quantity].to_i > add[:stock].to_i || add[:quantity].to_i == 0
-
-      if @cart_item
-        new_quantity = @cart_item.quantity + add[:quantity].to_i
-        if new_quantity > add[:stock].to_i
-          @cart_item.update(quantity: @cart_item.quantity)
-        else
-          @cart_item.update(quantity: new_quantity)
-        end
-      else
-        @cart_item = @cart.cart_items.build(product_id: add[:product_id], quantity: add[:quantity].to_i)
-      end
-
-      @cart_item.save
-      @cart.update(total: total_price)
+      process_cart_item(add)
     end
   end
 
@@ -55,10 +40,31 @@ class User::CartsController < ApplicationController
     @cart = current_user.cart
   end
 
-  def total_price
-    @total_price =
-      @cart.cart_items.reduce(0) do |sum, item|
-        sum + (item.product.price * item.quantity.to_i)
-      end
+  def process_cart_item(add)
+    @cart_item = @cart.cart_items.find_or_initialize_by(product_id: add[:product_id])
+
+    return if add[:quantity].to_i.zero?
+
+    update_cart_item(add)
+    save_cart_item
+    update_cart_total
+  end
+
+  def update_cart_item(add)
+    return unless @cart_item.new_record? || quantity_within_stock_limit?(add)
+
+    @cart_item.quantity += add[:quantity].to_i
+  end
+
+  def quantity_within_stock_limit?(add)
+    @cart_item.quantity + add[:quantity].to_i > add[:stock].to_i
+  end
+
+  def save_cart_item
+    @cart_item.save
+  end
+
+  def update_cart_total
+    @cart.update(total: total_price)
   end
 end

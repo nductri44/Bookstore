@@ -9,6 +9,13 @@ class ApplicationController < ActionController::Base
     render(template: 'errors/404', status: 404, layout: 'application', content_type: 'text/html')
   end
 
+  def total_price
+    @total_price =
+      current_user.cart.cart_items.reduce(0) do |sum, item|
+        sum + (item.product.price * item.quantity.to_i)
+      end
+  end
+
   private
 
   # Confirms a logged-in user.

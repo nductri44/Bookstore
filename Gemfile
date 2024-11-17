@@ -30,7 +30,7 @@ gem 'web-console', '4.2.1'
 
 # Development and test dependencies
 group :development, :test do
-  gem 'rails-dom-testing', '~> 2.0'
+  gem 'rails-dom-testing', '~> 2.2.0'
   gem 'rails-html-sanitizer', '~> 1.1'
   gem 'tzinfo', '~> 2.0.6'
   gem 'faker', '3.2.1'

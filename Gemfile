@@ -49,5 +49,4 @@ gem 'sassc', '2.4.0'
 
 # Test dependencies
 gem 'minitest', '5.20.0'
-gem 'rails-dom-testing', '2.2.0'
 gem 'minitest'
